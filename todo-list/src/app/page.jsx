@@ -13,12 +13,12 @@ export default function Home() {
   console.log(task)
   return (
     <todoContext.Provider value={{key, task, setTask, setName, name, control, setControl}}>
-      <div className="flex gap-10">
-        <div className="bg-zinc-400 w-60 h-screen text-white flex justify-center">
-          sideBar
-        </div>
+      <div className="flex flex-col gap-4 w-4/5 overflow-hidden h-[90vh] py-5 rounded-lg shadow-md bg-zinc-800">
         <div className="flex flex-col">
           <InputTask/>   
+        </div>
+        <hr className="border-zinc-600" />
+        <div className="h-full w-full pb-[8.5rem] flex justify-center">
           <Tasks/>       
         </div>
       </div>
