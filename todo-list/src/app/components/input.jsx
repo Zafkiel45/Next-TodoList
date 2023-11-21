@@ -15,9 +15,9 @@ export const InputTask = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         const NameSeem = Storage.find((item) => {return item.nome === name})
         
-        if(NameSeem != undefined) {
+        if(NameSeem != undefined || name === '') {
             setName(() => '')
-            window.alert("Não é possível adicionar o mesmo nome a múltiplas tarefas");
+            window.alert("[ERRO] - Não é possível adicionar o mesmo nome para uma outra tarefa; Não é possível deixar o nome da tarefa em branco.");
         } else {
             Storage.push({
                 nome: name
@@ -27,6 +27,10 @@ export const InputTask = () => {
             setTask(() => Storage)
         }
     };
+    const removeAllElements = () => {
+        localStorage.clear(key)
+        setTask(() => [])
+    }
 
     return (
         <div className="flex pt-3 flex-col gap-4">
@@ -35,6 +39,9 @@ export const InputTask = () => {
             </div>
             <div className="flex justify-center items-center">
                 <button onClick={setElementStorage} className="bg-blue-400 text-white font-medium w-4/5 h-fit py-1 px-8 shadow-md rounded-md">Adicionar</button>
+            </div>
+            <div className="flex justify-center items-center">
+                <button onClick={removeAllElements} className="bg-red-400 text-white font-medium w-4/5 h-fit py-1 px-8 shadow-md rounded-md">Excluir tudo</button>
             </div>
         </div>
     )
