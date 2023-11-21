@@ -9,12 +9,12 @@ export default function Home() {
   const key = 'tasks';
   const [task, setTask] = useState([])
   const [name, setName] = useState('')
-  const [control, setControl] = useState(true)
-  console.log(task)
+
   return (
-    <todoContext.Provider value={{key, task, setTask, setName, name, control, setControl}}>
+    <todoContext.Provider value={{key, task, setTask, setName, name}}>
       <div className="flex flex-col gap-4 w-4/5 overflow-hidden h-[90vh] py-5 rounded-lg shadow-md bg-zinc-800">
-        <div className="flex flex-col">
+        <div className="flex text-white font-bold items-center pt-2 flex-col">
+          Tarefas
           <InputTask/>   
         </div>
         <hr className="border-zinc-600" />

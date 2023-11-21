@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext  } from "react"
+import { useEffect, useState, useContext} from "react"
 import { todoContext } from "./context"
 
 export const Tasks = () => {
 
 
-    const { key, task, setTask } = useContext(todoContext)
+    const {task} = useContext(todoContext)
 
     return (
         <>    
