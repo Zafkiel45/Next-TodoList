@@ -3,7 +3,7 @@ import { todoContext } from "./context"
 
 export const InputTask = () => {
 
-    const { key, setTask, name, setName, descrebe} = useContext(todoContext)
+    const {idx, key, setTask, name, setName, descrebe} = useContext(todoContext)
 
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
@@ -21,8 +21,10 @@ export const InputTask = () => {
         } else {
             Storage.push({
                 nome: name,
-                descricao: descrebe
+                descricao: descrebe,
+                prioridade: ''
             });
+            
             localStorage.setItem(key, JSON.stringify(Storage))
             setName(() => '')
             setTask(() => Storage)

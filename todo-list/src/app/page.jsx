@@ -23,7 +23,7 @@ export default function Home() {
           <InputTask/>   
         </div>
         <hr className="border-zinc-600" />
-        <div className="h-full w-full pb-[8.5rem] flex justify-center">
+        <div className="h-auto overflow-y-scroll w-full py-2 flex justify-center">
           <Tasks/>       
         </div>
       </div>
