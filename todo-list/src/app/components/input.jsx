@@ -3,7 +3,7 @@ import { todoContext } from "./context"
 
 export const InputTask = () => {
 
-    const { key, setTask, name, setName} = useContext(todoContext)
+    const { key, setTask, name, setName, descrebe} = useContext(todoContext)
 
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
@@ -20,7 +20,8 @@ export const InputTask = () => {
             window.alert("[ERRO] - Não é possível adicionar o mesmo nome para uma outra tarefa; Não é possível deixar o nome da tarefa em branco.");
         } else {
             Storage.push({
-                nome: name
+                nome: name,
+                descricao: descrebe
             });
             localStorage.setItem(key, JSON.stringify(Storage))
             setName(() => '')
