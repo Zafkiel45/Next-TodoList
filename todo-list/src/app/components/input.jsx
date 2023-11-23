@@ -58,11 +58,11 @@ export const InputTask = () => {
 
 const Modal = ({removeAllElements, objectComplete, dispacth}) => {
     return (
-        <div className={`absolute top-1 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 w-[90%] h-auto shadow-md`}>
+        <div className={`absolute top-10 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 mobileMini:text-lg desktop:w-[30%] desktopMini:w-[40%] tablet:w-[60%] mobileMini:w-[70%] w-[90%] h-auto shadow-md`}>
             <div className="flex w-full items-center justify-between">
                 <button disabled className="w-[16px] opacity-0">
                 </button>
-                <h1 className="font-bold">Aviso</h1>
+                <h1 className="font-bold mobileMini:text-xl">Aviso</h1>
                 <svg onClick={() => dispacth({...objectComplete, visible: 'hidden'})} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                 </svg>
