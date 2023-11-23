@@ -118,7 +118,7 @@ export const Modal = () => {
                     <p>
                         Após excluir uma tarefa não é possível mais recuperá-la. Antes de 
                         excluir uma terafa tenha certeza de quê realmente deseja fazer isso.
-                        Caso tenha mudado de ideia, basta apertar o "x". 
+                        Caso tenha mudado de ideia, basta apertar o &quot;x&quot;. 
                     </p>
                     <button onClick={RemoveTask} className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg">
                         Excluir

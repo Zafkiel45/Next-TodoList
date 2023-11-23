@@ -10,7 +10,7 @@ export const InputTask = () => {
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         setTask(Storage)
-    }, []);
+    }, [key]);
 
     console.log(name)
     const setElementStorage = () => {
@@ -70,7 +70,7 @@ const Modal = ({removeAllElements, objectComplete, dispacth}) => {
             <p className="font-normal">
                 Se prosseguir com esta ação <strong>todas as suas tarefas serão excluídas
                 e não poderá recuperá-las nunca mais.</strong> Caso tenha mudado de ideia
-                basta cancelar apertando no "x". Vale lembrar que também é possível excluir 
+                basta cancelar apertando no &quot;x&quot;. Vale lembrar que também é possível excluir 
                 tarefas de forma individual clicando nela e descendo até a última opção.
             </p>
             <button onClick={removeAllElements} className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg">
