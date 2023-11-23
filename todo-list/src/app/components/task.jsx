@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { todoContext } from "./context"
 
 export const Tasks = () => {
