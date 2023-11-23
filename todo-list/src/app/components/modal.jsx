@@ -9,7 +9,11 @@ export const Modal = () => {
         blur: false
     })
     const toggleSideBar = () => {
-        setSideBar('right-[-200%]')
+        setSideBar({
+            ...sideBar,
+            position: 'right-[-200%]',
+            display: 'hidden',
+        })
     }
     const addDescrebe = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
@@ -54,7 +58,7 @@ export const Modal = () => {
     return (
         <>
         
-            <nav className={`absolute ${displayControl.blur ? 'blur-sm':' blur-0'} transition-all flex gap-5 flex-col items-center py-10 top-0 ${sideBar} w-screen h-screen overflow-y-scroll bg-zinc-900 p-3 text-white z-10`}>
+            <nav className={`absolute ${displayControl.blur ? 'blur-sm':' blur-0'} transition-all ${sideBar.display} gap-5 flex-col items-center py-10 top-0 ${sideBar.position} w-screen h-screen overflow-y-scroll bg-zinc-900 p-3 text-white z-10`}>
                 <div onClick={toggleSideBar} className="self-end relative bottom-3 w-fit h-fit bg-red-500 p-1 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>

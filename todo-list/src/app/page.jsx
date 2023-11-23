@@ -13,7 +13,10 @@ export default function Home() {
   const [name, setName] = useState('')
   const [idx, setIdx] = useState(null);
   const [descrebe, setDescrebe] = useState('')
-  const [sideBar, setSideBar] = useState('right-[-200%]')
+  const [sideBar, setSideBar] = useState({
+    position:'right-[-200%]',
+    display: 'hidden',
+  })
 
   return (
     <todoContext.Provider value={{key, task, setTask, setName, name, setSideBar, sideBar, descrebe, setDescrebe, idx, setIdx}}>
