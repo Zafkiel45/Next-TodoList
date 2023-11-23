@@ -60,19 +60,19 @@ export const Modal = () => {
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                     </svg>
                 </div>
-                <div className="w-full h-auto flex gap-3">
-                    <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} placeholder="Renomear tarefa..." className="placeholder:text-xs placeholder:text-zinc-500 placeholder:font-medium px-2 w-full bg-zinc-800 shadow-md rounded-md" />
+                <div className="w-full desktopMini:w-4/5 h-auto items-center flex gap-3">
+                    <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} placeholder="Renomear tarefa..." className="placeholder:text-xs placeholder:text-zinc-500 placeholder:font-medium mobileMini:py-2 px-2 w-full bg-zinc-800 shadow-md rounded-md" />
                     <button disabled={name === '' ? true:false} onClick={addRename} className={`${name === '' ? 'bg-gray-400':'bg-blue-400'} w-fit h-fit py-1 px-2 rounded-lg shadow-sm font-bold`}>
                         Renomear
                     </button>
                 </div>
-                <div className="w-full h-auto flex items-center gap-3 flex-col ">
-                    <textarea value={descrebe} onChange={(e) => setDescrebe(e.target.value)} className="bg-zinc-800 rounded-lg shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3" placeholder="Digite uma descrição para sua tarefa..." name="" id="" cols="30" rows="10"></textarea>
+                <div className="w-full desktopMini:w-4/5 h-auto flex items-center gap-3 flex-col ">
+                    <textarea value={descrebe} onChange={(e) => setDescrebe(e.target.value)} className="bg-zinc-800 rounded-lg mobileMini:w-full shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3" placeholder="Digite uma descrição para sua tarefa..." name="" id="" cols="30" rows="10"></textarea>
                     <button disabled={descrebe === '' ? true:false}  onClick={addDescrebe} className={`self-end ${descrebe === '' ? 'bg-gray-400':'bg-blue-400'} font-bold w-fit h-fit px-4 py-1 rounded-lg`}>
                         Salvar
                     </button>
                 </div>
-                <div className=" bg-zinc-800 w-full h-auto p-4 rounded-lg shadow-md flex items-center ">
+                <div className=" bg-zinc-800 w-full desktopMini:w-4/5 h-auto p-4 rounded-lg shadow-md flex items-center ">
                     {idx !== null && task !== undefined && task[idx] && task[idx].descricao !== '' ? (
                         <>
                             {task[idx].descricao}
@@ -83,7 +83,7 @@ export const Modal = () => {
                         </>
                     )}
                 </div>
-                <div className="flex flex-col gap-4 bg-zinc-800 rounded-md p-4 shadow-md w-full">
+                <div className="flex flex-col gap-4 bg-zinc-800 rounded-md p-4 shadow-md w-full desktopMini:w-4/5">
                     <div>
                         <p className="font-bold">
                             Prioridade:
@@ -99,7 +99,7 @@ export const Modal = () => {
                         ):null}               
                     </div>
                 </div>
-                <div className="w-full flex justify-center items-center p-4 border border-red-600 bg-red-400 rounded-lg shadow-md">
+                <div className="w-full desktopMini:w-4/5 flex justify-center items-center p-4 border border-red-600 bg-red-400 rounded-lg shadow-md">
                     <button onClick={() => setDisplayControl({...displayControl, visible: 'flex', blur: true})} className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg">
                         Excluir tarefa 
                     </button>
