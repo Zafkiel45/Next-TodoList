@@ -17,7 +17,7 @@ export const Tasks = () => {
 
     return (
         <>    
-            <ol className="flex flex-col gap-3 items-center py-4 list-none w-4/5 h-full overflow-hidden">
+            <ol className="flex flex-col gap-3 items-center py-4 list-none w-4/5 h-full">
                 {task.map((item, index) => {
                     return (
                         <li  onClick={() => {InterativeElements(index)}} className="w-full desktop:w-[90%] desktop:h-14 mobileMini:py-3 mobileMini:h-11 items-center flex justify-between text-sm h-10 bg-zinc-700 shadow-md rounded-lg py-2 px-3 text-white" key={index}> 
