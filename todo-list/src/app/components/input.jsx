@@ -22,7 +22,7 @@ export const InputTask = () => {
             Storage.push({
                 nome: name,
                 descricao: descrebe,
-                prioridade: ''
+                prioridade: 'fill-gray-300'
             });
             
             localStorage.setItem(key, JSON.stringify(Storage))
