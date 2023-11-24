@@ -8,7 +8,7 @@ export const Modal = () => {
         visible: 'hidden',
         blur: false
     })
-
+    // the function responsible of sideBar toggle
     const toggleSideBar = () => {
         setSideBar({
             ...sideBar,
@@ -16,7 +16,7 @@ export const Modal = () => {
             display: 'hidden',
         })
     }
-
+    // The function responsible of adding a description of a task
     const addDescrebe = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
 
@@ -27,7 +27,7 @@ export const Modal = () => {
             setDescrebe(() => '')
         }
     }
-
+    // The function responsible about the rename setting 
     const addRename = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
 
@@ -38,7 +38,7 @@ export const Modal = () => {
             setName(() => '')
         }
     }
-
+    // The function responsible for adding the priority to for a task 
     const PriorityFunction = (tag) => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         
@@ -48,7 +48,7 @@ export const Modal = () => {
             setTask(() => Storage)
         }
     }
-
+    // The function responsible for delete a individual task
     const RemoveTask = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         const filtedStorage = Storage.filter((element, idxs) => {
