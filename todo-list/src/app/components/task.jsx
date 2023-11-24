@@ -20,7 +20,7 @@ export const Tasks = () => {
             <ol className="flex flex-col gap-3 items-center py-4 list-none w-4/5 h-full">
                 {task.map((item, index) => {
                     return (
-                        <li  onClick={() => {InterativeElements(index)}} className="w-full desktop:w-[90%] hover:cursor-pointer desktop:h-14 mobileMini:py-3 mobileMini:h-11 items-center flex justify-between text-sm h-10 bg-zinc-700 shadow-md rounded-lg py-2 px-3 text-white" key={Match.random()}> 
+                        <li  onClick={() => {InterativeElements(index)}} className="w-full desktop:w-[90%] hover:cursor-pointer desktop:h-14 mobileMini:py-3 mobileMini:h-11 items-center flex justify-between text-sm h-10 bg-zinc-700 shadow-md rounded-lg py-2 px-3 text-white" key={Math.random()}> 
                             <div>{item.nome}</div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`${task[index].prioridade} animate-bounce`} height="22" viewBox="0 -960 960 960" width="22">
