@@ -60,7 +60,7 @@ export const Modal = () => {
         
             <nav className={`absolute ${displayControl.blur ? 'blur-sm':' blur-0'} transition-all ${sideBar.display} gap-5 flex-col items-center py-10 top-0 ${sideBar.position} w-screen h-screen overflow-y-scroll bg-zinc-900 p-3 text-white z-10`}>
                 <div onClick={toggleSideBar} className="self-end relative bottom-3 w-fit h-fit bg-red-500 p-1 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                     </svg>
                 </div>
@@ -96,9 +96,9 @@ export const Modal = () => {
                     <div className="flex gap-4 justify-center items-center">     
                         {idx !== null && task !== undefined && task[idx] ? (
                             <>                        
-                                <button onClick={() => {PriorityFunction('fill-blue-400')}} className={`w-fit ${task[idx].prioridade === 'fill-blue-400' ? 'bg-blue-500':'bg-transparent'} ${task[idx].prioridade === 'fill-blue-400' ? 'text-white':'text-blue-400'}  border  hover:text-white hover:bg-blue-600 border-blue-600 h-fit rounded-md px-3 py-1`}>Baixa</button>
-                                <button onClick={() => {PriorityFunction('fill-yellow-400')}} className={`w-fit ${task[idx].prioridade === 'fill-yellow-400' ? 'bg-yellow-500':'bg-transparent'} ${task[idx].prioridade === 'fill-yellow-400' ? 'text-white':'text-yellow-400'} border  hover:text-white hover:bg-yellow-600 border-yellow-600 rounded-md h-fit px-3 py-1`}>Médio</button>
-                                <button onClick={() => {PriorityFunction('fill-red-400')}} className={`w-fit ${task[idx].prioridade === 'fill-red-400' ? 'bg-red-400':'bg-transparent'} ${task[idx].prioridade === 'fill-red-400' ? 'text-white':'text-red-400'} border  hover:text-white hover:bg-red-600 border-red-600 rounded-md h-fit px-3 py-1`}>Alta</button>
+                                <button onClick={() => {PriorityFunction('fill-blue-500')}} className={`w-fit ${task[idx].prioridade === 'fill-blue-500' ? 'bg-blue-500':'bg-transparent'} ${task[idx].prioridade === 'fill-blue-500' ? 'text-white':'text-blue-400'}  border  hover:text-white hover:bg-blue-600 border-blue-600 h-fit rounded-md px-3 py-1`}>Baixa</button>
+                                <button onClick={() => {PriorityFunction('fill-yellow-500')}} className={`w-fit ${task[idx].prioridade === 'fill-yellow-500' ? 'bg-yellow-500':'bg-transparent'} ${task[idx].prioridade === 'fill-yellow-500' ? 'text-white':'text-yellow-400'} border  hover:text-white hover:bg-yellow-600 border-yellow-600 rounded-md h-fit px-3 py-1`}>Médio</button>
+                                <button onClick={() => {PriorityFunction('fill-red-500')}} className={`w-fit ${task[idx].prioridade === 'fill-red-500' ? 'bg-red-500':'bg-transparent'} ${task[idx].prioridade === 'fill-red-500' ? 'text-white':'text-red-400'} border  hover:text-white hover:bg-red-600 border-red-600 rounded-md h-fit px-3 py-1`}>Alta</button>
                             </>
                         ):null}               
                     </div>
@@ -115,7 +115,7 @@ export const Modal = () => {
                         <button disabled className="w-[16px] opacity-0">
                         </button>
                         <h1 className="font-bold">Aviso</h1>
-                        <svg onClick={() => setDisplayControl({...displayControl, visible: 'hidden', blur: false})} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <svg onClick={() => setDisplayControl({...displayControl, visible: 'hidden', blur: false})} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                         </svg>
                     </div>

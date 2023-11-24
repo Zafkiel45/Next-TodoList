@@ -42,13 +42,13 @@ export const InputTask = () => {
         <>        
             <div className={`flex pt-3 desktopMini:w-[90%] desktopMini:justify-center tablet:flex-row tablet:gap-2 flex-col gap-4`}>
                 <div className="flex justify-center items-center">
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite uma tarefa..." className="placeholder:text-zinc-400 placeholder:text-xs tablet:w-full shadow-md px-2 py-2 text-white font-normal w-4/5 rounded-md bg-zinc-700 "/>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite uma tarefa..." className="placeholder:text-zinc-400 focus:border focus:border-blue-400 placeholder:text-xs tablet:w-full shadow-md px-3 py-2 text-white font-normal w-4/5 rounded-md bg-zinc-700 "/>
                 </div>
                 <div className="flex justify-center items-center">
-                    <button onClick={setElementStorage} className="bg-blue-400 text-white font-medium w-4/5  tablet:w-fit tablet:px-4  desktopMini:px-6 h-fit py-1 px-8 shadow-md rounded-md">Adicionar</button>
+                    <button onClick={setElementStorage} className="bg-blue-500 text-white font-medium w-4/5  tablet:w-fit tablet:px-4 desktop:py-2 desktopMini:px-6 h-fit py-1 px-8 shadow-md rounded-md">Adicionar</button>
                 </div>
                 <div className="flex justify-center items-center">
-                    <button onClick={() => setDisplayControl({...displayControl, visible: 'flex', blur: true})} className="bg-red-400 text-white font-medium w-4/5   desktopMini:px-6 tablet:w-fit tablet:px-4 h-fit py-1 px-8 shadow-md rounded-md">Excluir tudo</button>
+                    <button onClick={() => setDisplayControl({...displayControl, visible: 'flex', blur: true})} className="bg-red-500 desktop:py-2  text-white font-medium w-4/5   desktopMini:px-6 tablet:w-fit tablet:px-4 h-fit py-1 px-8 shadow-md rounded-md">Excluir tudo</button>
                 </div>
             </div>
             <Modal dispacth={setDisplayControl} objectComplete={displayControl} visible={displayControl.visible} removeAllElements={removeAllElements} />
