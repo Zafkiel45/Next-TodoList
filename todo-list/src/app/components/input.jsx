@@ -17,9 +17,9 @@ export const InputTask = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         const NameSeem = Storage.find((item) => {return item.nome === name})
         
-        if(NameSeem != undefined || name === '' || name.length >= 30) {
+        if(NameSeem != undefined || name === '' || name.length >= 25 || name.trim() === '') {
             setName(() => '')
-            window.alert("[ERRO] - Não é possível adicionar o mesmo nome para uma outra tarefa; Não é possível deixar o nome da tarefa em branco.");
+            window.alert("[ERRO] \n - Não é possível adicionar o mesmo nome para uma outra tarefa;\n -Não é possível deixar o nome da tarefa em branco;\n - Não é possível escrever nomes com mais de 30 caracteres; \n - Não é permitido apenas espaços em branco;");
         } else {
             Storage.push({
                 nome: name,
@@ -58,7 +58,7 @@ export const InputTask = () => {
 
 const Modal = ({removeAllElements, objectComplete, dispacth}) => {
     return (
-        <div className={`absolute top-10 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 mobileMini:text-lg desktop:w-[30%] desktopMini:w-[40%] tablet:w-[60%] mobileMini:w-[70%] w-[90%] h-auto shadow-md`}>
+        <div className={`absolute top-5 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 mobileMini:top-3 desktop:w-[40%] desktopMini:w-[60%] tablet:w-[70%] mobileMini:w-[80%] w-[90%] h-auto shadow-md`}>
             <div className="flex w-full items-center justify-between">
                 <button disabled className="w-[16px] opacity-0">
                 </button>
@@ -73,6 +73,14 @@ const Modal = ({removeAllElements, objectComplete, dispacth}) => {
                 basta cancelar apertando no &quot;x&quot;. Vale lembrar que também é possível excluir 
                 tarefas de forma individual clicando nela e descendo até a última opção.
             </p>
+            <div className="bg-red-400 text-white font-normal border border-red-600 w-full p-4 shadow-md rounded-md">
+                Você perderá todas as suas tarefas e suas configurações como: detalhes da tarefa,
+                prioridades e quaisquer outras opções de configuração relacionado a tarefas. 
+                <br />
+                <br />
+                É importante enfatizar que é possível recria-las do zero caso queira uma tarefa 
+                exatamente igual a tarefa excluída.
+            </div>
             <button onClick={removeAllElements} className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg">
                 Excluir
             </button>

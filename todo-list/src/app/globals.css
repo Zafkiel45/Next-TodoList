@@ -13,5 +13,16 @@ body {
     background-color: #242424;
 }
 body, html {
-    overscroll-behavior: none;
-  }
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    background-color: rgb(37, 37, 37);
+    width: 10px;
+    border-radius: 1.25rem; /* 20px */
+}
+::-webkit-scrollbar-thumb {
+    background-color:rgb(47, 47, 47);
+    border-radius: 1.25rem;
+    width: 10px;
+}
