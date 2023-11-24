@@ -12,8 +12,8 @@ export const InputTask = () => {
         setTask(Storage)
     }, [key]);
 
-    console.log(name)
     const setElementStorage = () => {
+        
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         const NameSeem = Storage.find((item) => {return item.nome === name})
         
@@ -32,6 +32,7 @@ export const InputTask = () => {
             setTask(() => Storage)
         }
     };
+    
     const removeAllElements = () => {
         localStorage.clear(key)
         setTask(() => [])
@@ -57,6 +58,7 @@ export const InputTask = () => {
 }
 
 const Modal = ({removeAllElements, objectComplete, dispacth}) => {
+    
     return (
         <div className={`absolute top-5 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 mobileMini:top-3 desktop:w-[40%] desktopMini:w-[60%] tablet:w-[70%] mobileMini:w-[80%] w-[90%] h-auto shadow-md`}>
             <div className="flex w-full items-center justify-between">
