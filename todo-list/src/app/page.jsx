@@ -38,7 +38,7 @@ export default function Home() {
           <InputTask/>   
         </div>
         <Modal/>
-        <div className={`flex tablet:justify-end tablet:w-[103vw] w-[90vw] ${blur ? 'blur-sm':null} overflow-hidden h-screen py-2 bg-zinc-900`}>
+        <div className={`transition-all flex tablet:justify-end tablet:w-[103vw] w-[90vw] ${blur ? 'blur-sm':null} overflow-hidden h-screen py-2 bg-zinc-900`}>
           <div className="h-full overflow-y-scroll overflow-x-hidden desktopBig:w-[70%] w-full tablet:w-[60%] flex justify-center">
             <Tasks/>       
           </div>

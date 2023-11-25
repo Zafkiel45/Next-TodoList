@@ -3,11 +3,10 @@ import { todoContext } from "./context"
 
 export const InputTask = () => {
 
-
     const {setBlur, blur, key, setTask, name, setName, descrebe, toggleSideBarFunction } = useContext(todoContext)
     const [displayControl, setDisplayControl] = useState({
         visible: 'hidden',
-    })
+    });
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         setTask(Storage)
@@ -22,7 +21,7 @@ export const InputTask = () => {
             setName(() => '')
             window.alert("[ERRO] \n - Não é possível adicionar o mesmo nome para uma outra tarefa;\n -Não é possível deixar o nome da tarefa em branco;\n - Não é possível escrever nomes com mais de 30 caracteres; \n - Não é permitido apenas espaços em branco;");
         } else {
-            Storage.push({
+            Storage.unshift({
                 nome: name,
                 descricao: descrebe,
                 prioridade: 'fill-gray-300'
@@ -50,6 +49,19 @@ export const InputTask = () => {
     const controlElementsDisplay = () => {
         setDisplayControl({...displayControl, visible: 'flex'});
         setBlur(() => true)
+    }
+
+    const sortElements = (a, b, c, d) => {
+        const Storage = JSON.parse(localStorage.getItem(key) || '[]');
+        const levelPriority = {
+            "bg-red-500": a,
+            "bg-yellow-500": b,
+            "bg-blue-500": c,
+            "fill-gray-300": d,
+        }
+        Storage.sort((one, two) => levelPriority[one.prioridade] - levelPriority[two.prioridade]);
+        localStorage.setItem(key, JSON.stringify(Storage));
+        setTask(() => Storage)
     }
 
     return (
@@ -82,6 +94,15 @@ export const InputTask = () => {
                         </svg>
                     </button>
                 </div>
+                {/* filter */}
+                <div className={`border-green-400 border h-auto p-2  w-4/5 rounded-lg flex gap-4 items-center flex-col`}>
+                    <div>Filtrar Lista por prioridade</div>
+                    <div className="flex gap-2">
+                        <button onClick={() => sortElements(11,5,0, 20)} className="bg-blue-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Baixa</button>
+                        <button onClick={() => sortElements(5,0,11, 20)} className="bg-yellow-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Média</button>
+                        <button onClick={() => sortElements(0,5,11, 20)} className="bg-red-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Alta</button>
+                    </div>
+                </div>
             </div>
             <Modal setBlur={setBlur} dispacth={setDisplayControl} objectComplete={displayControl} visible={displayControl.visible} removeAllElements={removeAllElements} />
         </>
@@ -92,6 +113,7 @@ const Modal = ({removeAllElements, objectComplete, dispacth, setBlur}) => {
     
     return (
         <div className={`absolute top-0 ${objectComplete.visible} overflow-y-scroll text-white gap-4 items-center flex-col p-4 bg-zinc-700 z-10  tablet:h-fit tablet:py-7 tablet:top-[2%]  tablet:rounded-lg tablet:overflow-hidden  tablet:left-[30%] tablet:w-[80vw] desktopMini:top-[4%] desktopMini:left-[55%] desktopMini:w-[60vw] desktopBig:left-[97%] desktopBig:w-[45vw] w-full h-full shadow-md`}>
+            {/* Close button */}
             <div className="flex w-full items-center justify-between">
                 <button disabled className="w-[16px] opacity-0">
                 </button>
@@ -99,16 +121,18 @@ const Modal = ({removeAllElements, objectComplete, dispacth, setBlur}) => {
                 <svg onClick={() => {
                     dispacth({...objectComplete, visible: 'hidden'});
                     setBlur(() => false)
-                }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg cursor-pointer" viewBox="0 0 16 16">
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                 </svg>
             </div>
+            {/* text 1 */}
             <p className="font-normal">
                 Se prosseguir com esta ação <strong>todas as suas tarefas serão excluídas
                 e não poderá recuperá-las nunca mais.</strong> Caso tenha mudado de ideia
                 basta cancelar apertando no &quot;x&quot;. Vale lembrar que também é possível excluir 
                 tarefas de forma individual clicando nela e descendo até a última opção.
             </p>
+            {/* text 2 */}
             <div className="bg-red-400 text-white font-normal border border-red-600 w-full p-4 shadow-md rounded-md">
                 Você perderá todas as suas tarefas e suas configurações como: detalhes da tarefa,
                 prioridades e quaisquer outras opções de configuração relacionado a tarefas. 
@@ -117,6 +141,7 @@ const Modal = ({removeAllElements, objectComplete, dispacth, setBlur}) => {
                 É importante enfatizar que é possível recria-las do zero caso queira uma tarefa 
                 exatamente igual a tarefa excluída.
             </div>
+            {/* Delete all button */}
             <button onClick={removeAllElements} className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg">
                 Excluir
             </button>
