@@ -33,6 +33,12 @@ export const InputTask = () => {
         }
     };
     
+    const keyPressEvent = (event) => {
+        if(event.key === 'Enter') {
+            setElementStorage()
+        }
+    }
+
     const removeAllElements = () => {
         localStorage.clear(key)
         setTask(() => [])
@@ -51,7 +57,7 @@ export const InputTask = () => {
                 <span className="text-lg mobileMini:text-xl desktopMini:text-2xl">Lista de Tarefas</span>
                 {/* task input */}
                 <div className="flex justify-center w-full items-center">
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite uma tarefa..." className="placeholder:text-zinc-400 focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-white font-normal rounded-md bg-zinc-800 "/>
+                    <input type="text" value={name}  onKeyDown={keyPressEvent} onChange={(e) => setName(e.target.value)} placeholder="Digite uma tarefa..." className="placeholder:text-zinc-400 focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-white font-normal rounded-md bg-zinc-800 "/>
                 </div>
                 {/* add button */}
                 <div className="flex justify-center w-full items-center">
