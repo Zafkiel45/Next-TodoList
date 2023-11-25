@@ -12,6 +12,7 @@ export default function Home() {
   const [task, setTask] = useState([]);
   const [name, setName] = useState('');
   const [idx, setIdx] = useState(null);
+  const [blur, setBlur] = useState(false);
   const [descrebe, setDescrebe] = useState('');
   const [sideBar, setSideBar] = useState({
     position:'right-[-200%]',
@@ -26,9 +27,9 @@ export default function Home() {
   }
 
   return (
-    <todoContext.Provider value={{toggleSideBarFunction , key, task, setTask, setName, name, setSideBar, sideBar, descrebe, setDescrebe, idx, setIdx}}>
+    <todoContext.Provider value={{blur, setBlur, toggleSideBarFunction , key, task, setTask, setName, name, setSideBar, sideBar, descrebe, setDescrebe, idx, setIdx}}>
       <div className="flex ">
-        <div onClick={toggleSideBarFunctionReverse} className={`px-2 border-r border-r-zinc-800 tablet:hidden bg-zinc-900 h-screen flex items-center`}>
+        <div onClick={toggleSideBarFunctionReverse} className={`px-2 border-r justify-center border-r-zinc-800 w-[10vw] tablet:hidden bg-zinc-900 h-screen flex items-center`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>
@@ -37,8 +38,8 @@ export default function Home() {
           <InputTask/>   
         </div>
         <Modal/>
-        <div className="flex tablet:justify-end w-[90vw] overflow-hidden h-screen py-2 bg-zinc-900">
-          <div className="h-full overflow-y-scroll overflow-x-hidden desktopBig:w-[70%] w-full  tablet:w-[60%] flex justify-center">
+        <div className={`flex tablet:justify-end tablet:w-[103vw] w-[90vw] ${blur ? 'blur-sm':null} overflow-hidden h-screen py-2 bg-zinc-900`}>
+          <div className="h-full overflow-y-scroll overflow-x-hidden desktopBig:w-[70%] w-full tablet:w-[60%] flex justify-center">
             <Tasks/>       
           </div>
         </div>

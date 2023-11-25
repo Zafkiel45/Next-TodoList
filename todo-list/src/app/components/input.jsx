@@ -3,7 +3,8 @@ import { todoContext } from "./context"
 
 export const InputTask = () => {
 
-    const {key, setTask, name, setName, descrebe, toggleSideBarFunction } = useContext(todoContext)
+
+    const {setBlur, blur, key, setTask, name, setName, descrebe, toggleSideBarFunction } = useContext(todoContext)
     const [displayControl, setDisplayControl] = useState({
         visible: 'hidden',
     })
@@ -42,12 +43,18 @@ export const InputTask = () => {
     const removeAllElements = () => {
         localStorage.clear(key)
         setTask(() => [])
+        setBlur(() => false)
         setDisplayControl({...displayControl, visible: 'hidden', blur: false})
+    }
+    
+    const controlElementsDisplay = () => {
+        setDisplayControl({...displayControl, visible: 'flex'});
+        setBlur(() => true)
     }
 
     return (
         <>        
-            <div className={`flex pt-3 w-full h-screen items-center desktop:w-4/5 mobileMini:w-[90%] tablet:gap-2 flex-col gap-4`}>
+            <div className={`flex pt-3 w-full transition-all ${blur ? 'blur-sm':null} h-screen items-center desktop:w-4/5 mobileMini:gap-3 mobileMini:w-[90%] tablet:gap-5 flex-col gap-4`}>
                 {/* close button */}
                 <div onClick={toggleSideBarFunction} className="self-end tablet:hidden relative bottom-3 right-2 w-fit h-fit bg-red-500 p-1 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
@@ -69,27 +76,30 @@ export const InputTask = () => {
                 </div>
                 {/* delete button */}
                 <div className="flex justify-center w-full items-center">
-                    <button onClick={() => setDisplayControl({...displayControl, visible: 'flex', blur: true})} className="bg-red-500 desktop:py-2 flex items-center justify-center text-white font-medium w-4/5  desktopMini:px-6  tablet:px-4 h-fit py-2 px-9 shadow-md rounded-md">
+                    <button onClick={controlElementsDisplay} className={`bg-red-500 desktop:py-2 flex items-center justify-center text-white font-medium w-4/5 desktopMini:px-6  tablet:px-4 h-fit py-2 px-9 shadow-md rounded-md`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                             <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
                         </svg>
                     </button>
                 </div>
             </div>
-            <Modal dispacth={setDisplayControl} objectComplete={displayControl} visible={displayControl.visible} removeAllElements={removeAllElements} />
+            <Modal setBlur={setBlur} dispacth={setDisplayControl} objectComplete={displayControl} visible={displayControl.visible} removeAllElements={removeAllElements} />
         </>
     )
 }
 
-const Modal = ({removeAllElements, objectComplete, dispacth}) => {
+const Modal = ({removeAllElements, objectComplete, dispacth, setBlur}) => {
     
     return (
-        <div className={`absolute top-5 ${objectComplete.visible} text-white gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10 mobileMini:top-3 desktop:w-[40%] desktopMini:w-[60%] tablet:w-[70%] mobileMini:w-[80%] w-[90%] h-auto shadow-md`}>
+        <div className={`absolute top-0 ${objectComplete.visible} overflow-y-scroll text-white gap-4 items-center flex-col p-4 bg-zinc-700 z-10  tablet:h-fit tablet:py-7 tablet:top-[2%]  tablet:rounded-lg tablet:overflow-hidden  tablet:left-[30%] tablet:w-[80vw] desktopMini:top-[4%] desktopMini:left-[55%] desktopMini:w-[60vw] desktopBig:left-[97%] desktopBig:w-[45vw] w-full h-full shadow-md`}>
             <div className="flex w-full items-center justify-between">
                 <button disabled className="w-[16px] opacity-0">
                 </button>
                 <h1 className="font-bold mobileMini:text-xl">Aviso</h1>
-                <svg onClick={() => dispacth({...objectComplete, visible: 'hidden'})} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <svg onClick={() => {
+                    dispacth({...objectComplete, visible: 'hidden'});
+                    setBlur(() => false)
+                }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                 </svg>
             </div>
