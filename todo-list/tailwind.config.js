@@ -10,7 +10,8 @@ module.exports = {
       mobileMini: '444px',
       tablet: '634px',
       desktopMini: '940px',
-      desktop: '1150px'
+      desktop: '1150px',
+      desktopBig: '1250px'
     },
     extend: {
       backgroundImage: {
