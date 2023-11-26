@@ -1,8 +1,5 @@
 # Next-todoList
-
-# Make with Next.js and Tailwindcss 
-
-this simple project of todo list go for my portifolio. I want improve over time with firebase or other database. This readme still is developing.
+A simple todoList made in Next.js and Tailwindcss. Still in developed. I want add database as FireBase or any other. In addition, i want add differents features for this application. 
 
 # The features: 
 
@@ -11,5 +8,6 @@ this simple project of todo list go for my portifolio. I want improve over time 
 - Add a priority for your tasks
 - Delete your tasks
 - Delete all tasks
+- Filter for priority
 
  
