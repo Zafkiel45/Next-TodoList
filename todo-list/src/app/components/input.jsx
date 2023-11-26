@@ -30,12 +30,14 @@ export const InputTask = () => {
             localStorage.setItem(key, JSON.stringify(Storage))
             setName(() => '')
             setTask(() => Storage)
+            toggleSideBarFunction()
         }
     };
     
     const keyPressEvent = (event) => {
         if(event.key === 'Enter') {
             setElementStorage()
+            toggleSideBarFunction()
         }
     }
 
@@ -62,6 +64,7 @@ export const InputTask = () => {
         Storage.sort((one, two) => levelPriority[one.prioridade] - levelPriority[two.prioridade]);
         localStorage.setItem(key, JSON.stringify(Storage));
         setTask(() => Storage)
+        toggleSideBarFunction()
     }
 
     return (
@@ -95,12 +98,12 @@ export const InputTask = () => {
                     </button>
                 </div>
                 {/* filter */}
-                <div className={`border-green-400 border h-auto p-2  w-4/5 rounded-lg flex gap-4 items-center flex-col`}>
-                    <div>Filtrar Lista por prioridade</div>
-                    <div className="flex gap-2">
-                        <button onClick={() => sortElements(11,5,0, 20)} className="bg-blue-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Baixa</button>
-                        <button onClick={() => sortElements(5,0,11, 20)} className="bg-yellow-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Média</button>
-                        <button onClick={() => sortElements(0,5,11, 20)} className="bg-red-500 w-fit h-fit px-4 py-1 rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Alta</button>
+                <div className={`border-zinc-700 border h-auto p-2  w-4/5 rounded-lg  flex gap-4 items-center flex-col`}>
+                    <div className="tablet:text-center">Filtrar Lista por prioridade</div>
+                    <div className="flex tablet:flex-col desktopMini:flex-row desktopMini:py-2 tablet:items-center  gap-2">
+                        <button onClick={() => sortElements(11,5,0, 20)} className="bg-blue-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Baixa</button>
+                        <button onClick={() => sortElements(5,0,11, 20)} className="bg-yellow-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Média</button>
+                        <button onClick={() => sortElements(0,5,11, 20)} className="bg-red-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Alta</button>
                     </div>
                 </div>
             </div>

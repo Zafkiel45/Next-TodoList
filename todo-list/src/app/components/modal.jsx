@@ -120,7 +120,7 @@ export const Modal = () => {
                 </div>
             </nav>
             {/* Modal warn */}
-            <div className={`absolute ${displayControl.visible} text-white top-[10%]  flex tablet:left-[15%] gap-4 items-center flex-col p-4 rounded-lg bg-zinc-700 z-10  desktop:w-[50%] desktop:left-[25%] desktopMini:left-[20%] desktopMini:w-[60%] tablet:w-[70%] w-[90%] h-auto shadow-md`}>
+            <div className={`absolute ${displayControl.visible} text-white flex tablet:left-[15%] gap-4 items-center flex-col p-4  bg-zinc-800 z-10  desktop:w-[45%] desktop:left-[29%] desktopMini:left-[27%] desktopMini:w-[50%] tablet:h-fit tablet:bg-zinc-700 tablet:top-[10%] tablet:rounded-lg tablet:w-[70%] w-full h-full shadow-md`}>
                     <div className="flex w-full items-center justify-between">
                         <button disabled className="w-[16px] opacity-0">
                         </button>
