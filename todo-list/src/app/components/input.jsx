@@ -40,6 +40,7 @@ export const InputTask = () => {
         if(event.key === 'Enter') {
             setElementStorage()
             toggleSideBarFunction()
+            event.target.blur()
         }
     }
 
@@ -71,7 +72,7 @@ export const InputTask = () => {
 
     return (
         <>        
-            <div className={`flex pt-3 w-full transition-all ${blur ? 'blur-sm':null} h-screen items-center desktop:w-4/5 mobileMini:gap-3 mobileMini:w-[90%] tablet:gap-5 flex-col gap-4`}>
+            <div className={`flex pt-3 w-full transition-all ${blur ? 'blur-sm':null} h-screen items-center desktop:w-4/5 desktop:gap-2 mobileMini:gap-3 mobileMini:w-[90%] tablet:gap-5 flex-col gap-4`}>
                 {/* close button */}
                 <div onClick={toggleSideBarFunction} className="self-end tablet:hidden relative bottom-3 right-2 w-fit h-fit bg-red-500 p-1 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
