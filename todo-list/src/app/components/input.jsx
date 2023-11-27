@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState} from "react"
+import { useContext, useEffect, useState, useCallback} from "react"
 import { todoContext } from "./context"
+import { Tasks } from "./task";
 
 export const InputTask = () => {
 
-    const {setBlur, blur, key, setTask, name, setName, descrebe, toggleSideBarFunction } = useContext(todoContext)
+    const {setBlur, blur, key, setTask, name, setName, descrebe, toggleSideBarFunction, task } = useContext(todoContext)
     const [displayControl, setDisplayControl] = useState({
         visible: 'hidden',
     });
@@ -12,7 +13,7 @@ export const InputTask = () => {
         setTask(Storage)
     }, [key]);
 
-    const setElementStorage = () => {
+    const setElementStorage = useCallback(() => {
         
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         const NameSeem = Storage.find((item) => {return item.nome === name})
@@ -32,7 +33,8 @@ export const InputTask = () => {
             setTask(() => Storage)
             toggleSideBarFunction()
         }
-    };
+        console.log(task)
+    }, [name, descrebe]) 
     
     const keyPressEvent = (event) => {
         if(event.key === 'Enter') {
