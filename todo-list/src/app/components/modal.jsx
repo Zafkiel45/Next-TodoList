@@ -31,10 +31,13 @@ export const Modal = () => {
     const addRename = () => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
 
-        if(Storage[idx]) {
+        if(Storage[idx] && name.length <= 30) {
             Storage[idx].nome = name;
             localStorage.setItem(key, JSON.stringify(Storage));
             setTask(() => Storage)
+            setName(() => '')
+        } else {
+            window.alert("ERRO - Excedeu a quantidade de caracteres permitada.")
             setName(() => '')
         }
     }
@@ -59,7 +62,17 @@ export const Modal = () => {
         setDisplayControl({...displayControl, visible: 'hidden', blur: false})
         toggleSideBar()
     }
-
+    // key events 
+    const addDescribeWithKey = (e) => {
+        if(e.key === 'Enter') {
+            addDescrebe()
+        }
+    }
+    const addRemameWithKey = (e) => {
+        if(e.key === 'Enter') {
+            addRename()
+        }
+    }
     return (
         <>
             <nav className={`absolute ${displayControl.blur ? 'blur-sm':' blur-0'} transition-all ${sideBar.display} gap-5 flex-col items-center py-10 top-0 ${sideBar.position} w-screen h-screen overflow-y-scroll bg-zinc-900 p-3 text-white z-10`}>
@@ -71,14 +84,14 @@ export const Modal = () => {
                 </div>
                 {/* Input Rename */}
                 <div className="w-full desktopMini:w-4/5 h-auto items-center flex gap-3">
-                    <input type="text" value={name} onChange={(e) => {setName(e.target.value)}} placeholder="Renomear tarefa..." className="placeholder:text-xs placeholder:text-zinc-500 placeholder:font-medium mobileMini:py-3 px-3 w-full bg-zinc-800 py-2 shadow-md rounded-md" />
+                    <input type="text" value={name} onKeyDown={addRemameWithKey} onChange={(e) => {setName(e.target.value)}} placeholder="Renomear tarefa..." className="placeholder:text-xs placeholder:text-zinc-500 placeholder:font-medium mobileMini:py-3 px-3 w-full bg-zinc-800 py-2 shadow-md rounded-md" />
                     <button disabled={name === '' ? true:false} onClick={addRename} className={`${name === '' ? 'bg-gray-400':'bg-blue-400'} w-fit h-fit py-1 px-2 rounded-lg shadow-sm font-bold`}>
                         Renomear
                     </button>
                 </div>
                 {/* Textarea */}
                 <div className="w-full desktopMini:w-4/5 h-auto flex items-center gap-3 flex-col ">
-                    <textarea value={descrebe} onChange={(e) => setDescrebe(e.target.value)} className="bg-zinc-800 rounded-lg w-full shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3" placeholder="Digite uma descrição para sua tarefa..." name="" id="" cols="30" rows="10"></textarea>
+                    <textarea value={descrebe} onKeyDown={addDescribeWithKey} onChange={(e) => setDescrebe(e.target.value)} className="bg-zinc-800 rounded-lg w-full shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3" placeholder="Digite uma descrição para sua tarefa..." name="" id="" cols="30" rows="10"></textarea>
                     <button disabled={descrebe === '' ? true:false}  onClick={addDescrebe} className={`self-end ${descrebe === '' ? 'bg-gray-400':'bg-blue-400'} font-bold w-fit h-fit px-4 py-1 rounded-lg`}>
                         Salvar
                     </button>
