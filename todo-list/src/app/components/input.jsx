@@ -104,9 +104,9 @@ export const InputTask = () => {
                 <div className={`border-zinc-700 border h-auto p-2  w-4/5 rounded-lg  flex gap-4 items-center flex-col`}>
                     <div className="tablet:text-center">Filtrar Lista por prioridade</div>
                     <div className="flex tablet:flex-col desktopMini:flex-row desktopMini:py-2 tablet:items-center  gap-2">
-                        <button onClick={() => sortElements(11,5,0, 20)} className="bg-blue-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Baixa</button>
-                        <button onClick={() => sortElements(5,0,11, 20)} className="bg-yellow-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Média</button>
-                        <button onClick={() => sortElements(0,5,11, 20)} className="bg-red-500 w-fit h-fit px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-white font-bold shadow-md cursor-pointer">Alta</button>
+                        <button onClick={() => sortElements(11,5,0, 20)} className="bg-blue-transparent border w-fit h-fit hover:bg-blue-500 hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-blue-500 font-normal shadow-md cursor-pointer">Baixa</button>
+                        <button onClick={() => sortElements(5,0,11, 20)} className="bg-yellow-transparent border w-fit h-fit hover:bg-yellow-500 hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-yellow-500 text-yellow-500 font-normal shadow-md cursor-pointer">Média</button>
+                        <button onClick={() => sortElements(0,5,11, 20)} className="bg-red-transparent border w-fit h-fit hover:bg-red-500 hover:text-white   px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-red-500  text-red-500 font-normal shadow-md cursor-pointer">Alta</button>
                     </div>
                 </div>
             </div>
