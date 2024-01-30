@@ -18,16 +18,30 @@ export default function Home() {
     position:'right-[-200%]',
     display: 'hidden',
   });
-  const [toggleSideBar, setToggleSideBar] = useState('left-0');
-  const toggleSideBarFunction = () => {
+  const [toggleSideBar, setToggleSideBar] = useState<string>('left-0');
+  const toggleSideBarFunction = ():void => {
     setToggleSideBar('left-[-100%]')
   }
-  const toggleSideBarFunctionReverse = () => {
+  const toggleSideBarFunctionReverse = ():void => {
     setToggleSideBar('left-0')
   }
-
   return (
-    <todoContext.Provider value={{blur, setBlur, toggleSideBarFunction , key, task, setTask, setName, name, setSideBar, sideBar, descrebe, setDescrebe, idx, setIdx}}>
+    <todoContext.Provider value={{
+      blur, 
+      setBlur, 
+      toggleSideBarFunction, 
+      key, 
+      task, 
+      setTask, 
+      setName, 
+      name, 
+      setSideBar, 
+      sideBar, 
+      descrebe, 
+      setDescrebe, 
+      idx, 
+      setIdx
+    }}>
       <div className="flex ">
         <div onClick={toggleSideBarFunctionReverse} className={`px-2 border-r justify-center border-r-zinc-800 w-[10vw] tablet:hidden bg-zinc-900 h-screen flex items-center`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-arrow-right" viewBox="0 0 16 16">
