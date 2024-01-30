@@ -1,10 +1,19 @@
 import { useContext, useEffect, useState, useCallback} from "react"
 import { todoContext } from "./context"
-import { Tasks } from "./task";
 
 export const InputTask = () => {
 
-    const {setBlur, blur, key, setTask, name, setName, descrebe, toggleSideBarFunction, task } = useContext(todoContext)
+    const {
+        setBlur, 
+        blur, 
+        key, 
+        setTask, 
+        name,
+        setName, 
+        descrebe, 
+        toggleSideBarFunction, 
+        task } = useContext(todoContext);
+
     const [displayControl, setDisplayControl] = useState({
         visible: 'hidden',
     });
@@ -45,7 +54,7 @@ export const InputTask = () => {
     }
 
     const removeAllElements = () => {
-        localStorage.clear(key)
+        localStorage.removeItem(key)
         setTask(() => [])
         setBlur(() => false)
         setDisplayControl({...displayControl, visible: 'hidden', blur: false})
