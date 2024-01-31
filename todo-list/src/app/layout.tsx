@@ -9,7 +9,7 @@ export const metadata = {
   description: 'TodoList simple made in Next.js and Tailwindcss. get organized right now!',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }:Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="pt-br" className='h-screen w-screen flex justify-center items-center '>
       <body className={`${inter.className} h-screen w-screen flex justify-center items-center `}>
