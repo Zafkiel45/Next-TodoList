@@ -142,8 +142,8 @@ export const Modal = () => {
             placeholder="Digite uma descrição para sua tarefa..."
             name=""
             id=""
-            cols="30"
-            rows="10"
+            cols={30}
+            rows={10}
           ></textarea>
           <button
             disabled={descrebe === "" ? true : false}

@@ -3,6 +3,14 @@ import { todoContext } from "./context"
 
 export const InputTask = () => {
 
+    interface controler {
+        visible: string;
+        blur?: boolean;
+    }
+    
+    const [displayControl, setDisplayControl] = useState<controler>({
+        visible: 'hidden',
+    });
     const {
         setBlur, 
         blur, 
@@ -12,11 +20,9 @@ export const InputTask = () => {
         setName, 
         descrebe, 
         toggleSideBarFunction, 
-        task } = useContext(todoContext);
+        task 
+    } = useContext(todoContext);
 
-    const [displayControl, setDisplayControl] = useState({
-        visible: 'hidden',
-    });
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
         setTask(Storage)
@@ -104,7 +110,7 @@ export const InputTask = () => {
                 {/* delete button */}
                 <div className="flex justify-center w-full items-center">
                     <button onClick={controlElementsDisplay} className={`bg-red-500 desktop:py-2 flex items-center justify-center text-white font-medium w-4/5 desktopMini:px-6  tablet:px-4 h-fit py-2 px-9 shadow-md rounded-md`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-trash3-fill" viewBox="0 0 16 16">
                             <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
                         </svg>
                     </button>
@@ -119,7 +125,7 @@ export const InputTask = () => {
                     </div>
                 </div>
             </div>
-            <Modal setBlur={setBlur} dispacth={setDisplayControl} objectComplete={displayControl} visible={displayControl.visible} removeAllElements={removeAllElements} />
+            <Modal setBlur={setBlur} dispacth={setDisplayControl} objectComplete={displayControl} removeAllElements={removeAllElements} />
         </>
     )
 }
