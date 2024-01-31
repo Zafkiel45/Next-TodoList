@@ -11,6 +11,7 @@ export const InputTask = () => {
     const [displayControl, setDisplayControl] = useState<controler>({
         visible: 'hidden',
     });
+
     const {
         setBlur, 
         blur, 
@@ -25,18 +26,33 @@ export const InputTask = () => {
 
     useEffect(() => {
         const Storage = JSON.parse(localStorage.getItem(key) || '[]');
-        setTask(Storage)
+        setTask(Storage);
     }, [key]);
 
-    const setElementStorage = useCallback(() => {
+    const setElementStorage = useCallback(async () => {
+
+        const Storage = await JSON.parse(localStorage.getItem(key) || '[]');
+        const NameSeem = await Storage.find((item: { nome: string; }) => {return item.nome === name})
         
-        const Storage = JSON.parse(localStorage.getItem(key) || '[]');
-        const NameSeem = Storage.find((item) => {return item.nome === name})
+        interface currentObjectErros {
+            nameSeem: boolean | undefined;
+            nameLength: boolean;
+            nameVoid: boolean;
+            nameSpace: boolean;
+        }
         
-        if(NameSeem != undefined || name === '' || name.length >= 25 || name.trim() === '') {
+        const objectError: currentObjectErros = {
+            nameSeem: NameSeem != undefined,
+            nameLength: name.length >= 25,
+            nameVoid: name === '',
+            nameSpace: name.trim() === '',
+        }
+        
+        if(objectError.nameSeem || objectError.nameVoid || objectError.nameLength || objectError.nameSpace) {
             setName(() => '')
             window.alert("[ERRO] \n - Não é possível adicionar o mesmo nome para uma outra tarefa;\n -Não é possível deixar o nome da tarefa em branco;\n - Não é possível escrever nomes com mais de 30 caracteres; \n - Não é permitido apenas espaços em branco;");
         } else {
+
             Storage.unshift({
                 nome: name,
                 descricao: descrebe,
@@ -48,7 +64,7 @@ export const InputTask = () => {
             setTask(() => Storage)
             toggleSideBarFunction()
         }
-        console.log(task)
+        
     }, [name, descrebe]) 
     
     const keyPressEvent = (event) => {
@@ -71,15 +87,22 @@ export const InputTask = () => {
         setBlur(() => true)
     }
 
-    const sortElements = (a, b, c, d) => {
-        const Storage = JSON.parse(localStorage.getItem(key) || '[]');
+    const sortElements = async (a:number, b:number, c:number, d:number) => {
+
+        const Storage = await JSON.parse(localStorage.getItem(key) || '[]');
+
         const levelPriority = {
             "bg-red-500": a,
             "bg-yellow-500": b,
             "bg-blue-500": c,
             "fill-gray-300": d,
         }
-        Storage.sort((one, two) => levelPriority[one.prioridade] - levelPriority[two.prioridade]);
+
+        interface currentPriority {
+            prioridade: string | number;
+        }
+
+        Storage.sort((one: currentPriority, two: currentPriority) => levelPriority[one.prioridade] - levelPriority[two.prioridade]);
         localStorage.setItem(key, JSON.stringify(Storage));
         setTask(() => Storage)
         toggleSideBarFunction()
