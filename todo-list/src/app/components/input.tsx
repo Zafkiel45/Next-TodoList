@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback} from "react"
+import { useContext, useEffect, useState, useCallback, KeyboardEvent} from "react"
 import { todoContext } from "./context"
 
 export const InputTask = () => {
@@ -67,15 +67,15 @@ export const InputTask = () => {
         
     }, [name, descrebe]) 
     
-    const keyPressEvent = (event) => {
+    const keyPressEvent = (event: KeyboardEvent<HTMLInputElement>) => {
         if(event.key === 'Enter') {
             setElementStorage()
             toggleSideBarFunction()
-            event.target.blur()
+            event.currentTarget.blur()
         }
     }
 
-    const removeAllElements = () => {
+    const removeAllElements = ():void => {
         localStorage.removeItem(key)
         setTask(() => [])
         setBlur(() => false)

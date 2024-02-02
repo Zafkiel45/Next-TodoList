@@ -14,12 +14,13 @@ export const Modal = () => {
     idx,
     task,
   } = useContext(todoContext);
+
   const [displayControl, setDisplayControl] = useState({
     visible: "hidden",
     blur: false,
   });
   // the function responsible of sideBar toggle
-  const toggleSideBar = () => {
+  const toggleSideBar = ():void => {
     setSideBar({
       ...sideBar,
       position: "right-[-200%]",
@@ -27,7 +28,7 @@ export const Modal = () => {
     });
   };
   // The function responsible of adding a description of a task
-  const addDescrebe = () => {
+  const addDescrebe = ():void => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
     if (Storage[idx]) {
@@ -38,21 +39,23 @@ export const Modal = () => {
     }
   };
   // The function responsible about the rename setting
-  const addRename = () => {
+  const addRename = ():void => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
     if (Storage[idx] && name.length <= 30) {
+
       Storage[idx].nome = name;
       localStorage.setItem(key, JSON.stringify(Storage));
       setTask(() => Storage);
       setName(() => "");
+
     } else {
       window.alert("ERRO - Excedeu a quantidade de caracteres permitada.");
       setName(() => "");
     }
   };
   // The function responsible for adding the priority to for a task
-  const PriorityFunction = (tag) => {
+  const PriorityFunction = (tag:string) => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
     if (Storage[idx]) {
@@ -64,7 +67,7 @@ export const Modal = () => {
   // The function responsible for delete a individual task
   const RemoveTask = () => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
-    const filtedStorage = Storage.filter((element, idxs) => {
+    const filtedStorage = Storage.filter((element: any, idxs: number) => {
       return idx !== idxs;
     });
     localStorage.setItem(key, JSON.stringify(filtedStorage));
@@ -73,12 +76,12 @@ export const Modal = () => {
     toggleSideBar();
   };
   // key events
-  const addDescribeWithKey = (e) => {
+  const addDescribeWithKey = (e: { key: string; }) => {
     if (e.key === "Enter") {
       addDescrebe();
     }
   };
-  const addRemameWithKey = (e) => {
+  const addRemameWithKey = (e: { key: string; }) => {
     if (e.key === "Enter") {
       addRename();
     }
