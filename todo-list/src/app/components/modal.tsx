@@ -20,7 +20,7 @@ export const Modal = () => {
     blur: false,
   });
   // the function responsible of sideBar toggle
-  const toggleSideBar = ():void => {
+  const toggleSideBar = (): void => {
     setSideBar({
       ...sideBar,
       position: "right-[-200%]",
@@ -28,7 +28,7 @@ export const Modal = () => {
     });
   };
   // The function responsible of adding a description of a task
-  const addDescrebe = ():void => {
+  const addDescrebe = (): void => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
     if (Storage[idx]) {
@@ -39,49 +39,74 @@ export const Modal = () => {
     }
   };
   // The function responsible about the rename setting
-  const addRename = ():void => {
+  const addRename = (): void => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
-    if (Storage[idx] && name.length <= 30) {
+    try {
+      if (!Storage) {
+        throw new Error(
+          "ocorreu um erro com o banco de dados ao tentar renomear esta tarefa"
+        );
+      }
 
-      Storage[idx].nome = name;
-      localStorage.setItem(key, JSON.stringify(Storage));
-      setTask(() => Storage);
-      setName(() => "");
-
-    } else {
-      window.alert("ERRO - Excedeu a quantidade de caracteres permitada.");
-      setName(() => "");
-    }
+      if (Storage[idx] && name.length <= 30) {
+        Storage[idx].nome = name;
+        localStorage.setItem(key, JSON.stringify(Storage));
+        setTask(() => Storage);
+        setName(() => "");
+      } else {
+        window.alert("ERRO - Excedeu a quantidade de caracteres permitada.");
+        setName(() => "");
+      }
+    } catch (error) {}
   };
   // The function responsible for adding the priority to for a task
-  const PriorityFunction = (tag:string) => {
+  const PriorityFunction = (tag: string) => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
-    if (Storage[idx]) {
-      Storage[idx].prioridade = tag;
-      localStorage.setItem(key, JSON.stringify(Storage));
-      setTask(() => Storage);
+    try {
+      if (!Storage) {
+        throw new Error(
+          "ocorreu um erro com o banco de dados ao alterar a prioridade da tarefa"
+        );
+      }
+
+      if (Storage[idx]) {
+        Storage[idx].prioridade = tag;
+        localStorage.setItem(key, JSON.stringify(Storage));
+        setTask(() => Storage);
+      }
+    } catch (error) {
+      console.log("ocorreu um erro " + error);
     }
   };
   // The function responsible for delete a individual task
   const RemoveTask = () => {
     const Storage = JSON.parse(localStorage.getItem(key) || "[]");
-    const filtedStorage = Storage.filter((element: any, idxs: number) => {
-      return idx !== idxs;
-    });
-    localStorage.setItem(key, JSON.stringify(filtedStorage));
-    setTask(() => filtedStorage);
-    setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
-    toggleSideBar();
+
+    try {
+      if (!Storage) {
+        throw new Error("Ocorreu um erro ao remover o item da lista");
+      }
+
+      const filtedStorage = Storage.filter((element: any, idxs: number) => {
+        return idx !== idxs;
+      });
+      localStorage.setItem(key, JSON.stringify(filtedStorage));
+      setTask(() => filtedStorage);
+      setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
+      toggleSideBar();
+    } catch ({ name, mensage }) {
+      console.log(`ocorreu o seguinte erro ${mensage} com o nome dê ${name}`);
+    }
   };
   // key events
-  const addDescribeWithKey = (e: { key: string; }) => {
+  const addDescribeWithKey = (e: { key: string }) => {
     if (e.key === "Enter") {
       addDescrebe();
     }
   };
-  const addRemameWithKey = (e: { key: string; }) => {
+  const addRemameWithKey = (e: { key: string }) => {
     if (e.key === "Enter") {
       addRename();
     }
