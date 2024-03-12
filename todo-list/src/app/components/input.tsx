@@ -6,6 +6,7 @@ import {
   KeyboardEvent,
 } from "react";
 import { todoContext } from "./context";
+import { SwitchModeButton } from "./inputs/switch_button";
 
 export const InputTask = () => {
   interface controler {
@@ -147,14 +148,14 @@ export const InputTask = () => {
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            fill="currentColor"
+            fill="white"
             className="bi bi-x-lg"
             viewBox="0 0 16 16"
           >
             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
           </svg>
         </div>
-        <span className="text-lg mobileMini:text-xl desktopMini:text-2xl">
+        <span className="text-lg text-black transition-all dark:text-white mobileMini:text-xl desktopMini:text-2xl">
           Lista de Tarefas
         </span>
         {/* task input */}
@@ -165,9 +166,10 @@ export const InputTask = () => {
             onKeyDown={keyPressEvent}
             onChange={(e) => setName(e.target.value)}
             placeholder="Digite uma tarefa..."
-            className="placeholder:text-zinc-400 focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-white font-normal rounded-md bg-zinc-800 "
+            className={`placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-all  focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-black dark:text-black font-normal rounded-md bg-gray-200 dark:bg-zinc-800`}
           />
         </div>
+        
         {/* add button */}
         <div className="flex justify-center w-full items-center">
           <button
@@ -206,30 +208,31 @@ export const InputTask = () => {
         </div>
         {/* filter */}
         <div
-          className={`border-zinc-700 border h-auto p-2  w-4/5 rounded-lg  flex gap-4 items-center flex-col`}
+          className={`dark:border-zinc-700 border-zinc-400 border h-auto p-2  w-4/5 rounded-lg  flex gap-4 items-center flex-col`}
         >
-          <div className="tablet:text-center">Filtrar Lista por prioridade</div>
+          <div className="tablet:text-center text-black dark:text-white transition-all">Filtrar Lista por prioridade</div>
           <div className="flex tablet:flex-col desktopMini:flex-row desktopMini:py-2 tablet:items-center  gap-2">
             <button
               onClick={() => sortElements(11, 5, 0, 20)}
-              className="bg-blue-transparent border w-fit h-fit hover:bg-blue-500 hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-blue-500 text-blue-500 font-normal shadow-md cursor-pointer"
+              className="bg-blue-500 dark:bg-transparent border w-fit h-fit dark:hover:bg-blue-500 dark:hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg dark:border-blue-500 dark:text-blue-500 text-white font-medium shadow-sm dark:shadow-md cursor-pointer"
             >
               Baixa
             </button>
             <button
               onClick={() => sortElements(5, 0, 11, 20)}
-              className="bg-yellow-transparent border w-fit h-fit hover:bg-yellow-500 hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-yellow-500 text-yellow-500 font-normal shadow-md cursor-pointer"
+              className="dark:bg-transparent bg-yellow-500 border w-fit h-fit dark:hover:bg-yellow-500 dark:hover:text-white  px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg dark:border-yellow-500 text-white dark:text-yellow-500 font-medium shadow-sm dark:shadow-md cursor-pointer"
             >
               Média
             </button>
             <button
               onClick={() => sortElements(0, 5, 11, 20)}
-              className="bg-red-transparent border w-fit h-fit hover:bg-red-500 hover:text-white   px-4 py-1 tablet:w-28  desktopMini:w-fit rounded-lg border-red-500  text-red-500 font-normal shadow-md cursor-pointer"
+              className="bg-red-500 dark:bg-transparent border w-fit h-fit dark:hover:bg-red-500 dark:hover:text-white px-4 py-1 tablet:w-28 desktopMini:w-fit rounded-lg dark:border-red-500 text-white dark:text-red-500 font-medium shadow-sm dark:shadow-md cursor-pointer"
             >
               Alta
             </button>
           </div>
         </div>
+        <SwitchModeButton />
       </div>
       <Modal
         setBlur={setBlur}
@@ -244,7 +247,7 @@ export const InputTask = () => {
 const Modal = ({ removeAllElements, objectComplete, dispacth, setBlur }) => {
   return (
     <div
-      className={`absolute top-0 ${objectComplete.visible} overflow-y-scroll text-white gap-4 items-center flex-col p-4 bg-zinc-700 z-10  tablet:h-fit tablet:py-7 tablet:top-[2%]  tablet:rounded-lg tablet:overflow-hidden  tablet:left-[30%] tablet:w-[80vw] desktopMini:top-[4%] desktopMini:left-[55%] desktopMini:w-[60vw] desktopBig:left-[97%] desktopBig:w-[45vw] w-full h-full shadow-md`}
+      className={`absolute top-0 ${objectComplete.visible} overflow-y-scroll text-black dark:text-white gap-4 items-center flex-col p-4 bg-white dark:bg-zinc-700 z-10  tablet:h-fit tablet:py-7 tablet:top-[2%]  tablet:rounded-lg tablet:overflow-hidden  tablet:left-[30%] tablet:w-[80vw] desktopMini:top-[4%] desktopMini:left-[55%] desktopMini:w-[60vw] desktopBig:left-[97%] desktopBig:w-[45vw] w-full h-full shadow-md`}
     >
       {/* Close button */}
       <div className="flex w-full items-center justify-between">
@@ -277,7 +280,7 @@ const Modal = ({ removeAllElements, objectComplete, dispacth, setBlur }) => {
         clicando nela e descendo até a última opção.
       </p>
       {/* text 2 */}
-      <div className="bg-red-400 text-white font-normal border border-red-600 w-full p-4 shadow-md rounded-md">
+      <div className="bg-red-500 text-white font-normal border border-red-600 w-full p-4 shadow-md rounded-md">
         Você perderá todas as suas tarefas e suas configurações como: detalhes
         da tarefa, prioridades e quaisquer outras opções de configuração
         relacionado a tarefas.
@@ -288,7 +291,7 @@ const Modal = ({ removeAllElements, objectComplete, dispacth, setBlur }) => {
       {/* Delete all button */}
       <button
         onClick={removeAllElements}
-        className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg"
+        className="font-bold bg-red-500 text-white w-fit h-fit px-4 py-1 shadow-md rounded-lg"
       >
         Excluir
       </button>

@@ -14,10 +14,9 @@ export const Tasks = () => {
 
             return task.map((item, index) => {
                 return (
-                    <li  onClick={() => {InterativeElements(index)}} className="relative tablet:hover:scale-105 tablet:transition-transform w-full desktop:w-[90%] hover:cursor-pointer desktop:h-14 mobileMini:py-3 mobileMini:h-11 items-center flex justify-between text-sm h-10 bg-zinc-800 shadow-md rounded-lg py-2 px-3 text-white" key={Math.random()}> 
+                    <li  onClick={() => {InterativeElements(index)}} className="relative tablet:hover:scale-105 border dark:border-none border-gray-200 tablet:transition-transform w-full desktop:w-[90%] hover:cursor-pointer desktop:h-14 mobileMini:py-3 mobileMini:h-11 items-center flex justify-between text-sm h-10 bg-gray-100 dark:bg-zinc-800 transition-colors shadow-md rounded-lg py-2 px-3 text-black dark:text-white" key={Math.random()}> 
                         <div>{item.nome}</div>
                         <div className={`${task[index].prioridade} animate-pulse top-[-2px] right-[-2px] rounded-full w-3 h-3 absolute`}>
-    
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">
