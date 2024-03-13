@@ -20,7 +20,6 @@ export interface controler {
 }
 
 export const InputTask = () => {
-
   const [displayControl, setDisplayControl] = useState<controler>({
     visible: "hidden",
   });
@@ -147,7 +146,10 @@ export const InputTask = () => {
         } h-screen items-center desktop:w-4/5 desktop:gap-2 mobileMini:gap-3 mobileMini:w-[90%] tablet:gap-5 flex-col gap-4`}
       >
         {/* close button */}
-        <CloseButton toggleSideBarFunction={toggleSideBarFunction}/>
+        <CloseButton
+          isModal={false}
+          toggleSideBarFunction={toggleSideBarFunction}
+        />
         <span className="text-lg text-black transition-all dark:text-white mobileMini:text-xl desktopMini:text-2xl">
           Lista de Tarefas
         </span>
@@ -170,4 +172,3 @@ export const InputTask = () => {
     </>
   );
 };
-

@@ -17,7 +17,7 @@ export const InputNameTask = ({keyEvent}:TypeOfProps) => {
                 onKeyDown={keyEvent}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Digite uma tarefa..."
-                className={`placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-all  focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-black dark:text-black font-normal rounded-md bg-gray-200 dark:bg-zinc-800`}
+                className={`placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-all  focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-black dark:text-white font-normal rounded-md bg-gray-200 dark:bg-zinc-800`}
             />
       </div>
     )

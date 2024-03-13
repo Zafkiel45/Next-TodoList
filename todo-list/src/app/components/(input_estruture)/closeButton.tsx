@@ -1,8 +1,12 @@
-export const CloseButton = ({toggleSideBarFunction}:{toggleSideBarFunction: () => void}) => {
+export const CloseButton = (
+  { 
+    toggleSideBarFunction,
+    isModal,
+  }:{toggleSideBarFunction: () => void, isModal:  boolean}) => {
     return (
         <div
         onClick={toggleSideBarFunction}
-        className="self-end tablet:hidden relative bottom-3 right-2 w-fit h-fit bg-red-500 p-1 rounded-full"
+        className={`self-end ${isModal ? '':'tablet:hidden'} relative bottom-3 right-2 w-fit h-fit bg-red-500 p-1 rounded-full`}
         >
         <svg
           xmlns="http://www.w3.org/2000/svg"

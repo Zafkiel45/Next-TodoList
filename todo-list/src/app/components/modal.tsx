@@ -1,5 +1,12 @@
 import { useContext, useState } from "react";
 import { todoContext } from "./context";
+import { CloseButton } from "./(input_estruture)/closeButton";
+import { InputRename } from "./(modal_estruture)/inputRename";
+import { TextArea } from "./(modal_estruture)/textArea";
+import { Description } from "./(modal_estruture)/Description";
+import { Priority } from "./(modal_estruture)/setPriority";
+import { DeleteButton } from "./(modal_estruture)/delete_button";
+import { ModalWarn } from "./(modal_estruture)/Modal_warn";
 
 export const Modal = () => {
   const {
@@ -123,198 +130,32 @@ export const Modal = () => {
         } w-screen h-screen overflow-y-scroll bg-white text-black dark:bg-zinc-900 p-3 dark:text-white z-10`}
       >
         {/* close button */}
-        <div
-          onClick={toggleSideBar}
-          className="self-end relative bottom-3 w-fit h-fit bg-red-500 p-1 rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="white"
-            className="bi bi-x-lg"
-            viewBox="0 0 16 16"
-          >
-            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-          </svg>
-        </div>
+        <CloseButton toggleSideBarFunction={toggleSideBar} isModal={true} />
         {/* Input Rename */}
-        <div className="w-full desktopMini:w-4/5 h-auto items-center flex gap-3">
-          <input
-            type="text"
-            value={name}
-            onKeyDown={addRemameWithKey}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            placeholder="Renomear tarefa..."
-            className="placeholder:text-xs placeholder:text-stone-400 dark:border-none border border-gray-300 dark:placeholder:text-zinc-500 placeholder:font-medium mobileMini:py-3 px-3 w-full bg-gray-200 dark:bg-zinc-800 py-2 shadow-md rounded-md"
-          />
-          <button
-            disabled={name === "" ? true : false}
-            onClick={addRename}
-            className={`${
-              name === "" ? "bg-gray-400" : "bg-blue-400"
-            } w-fit h-fit py-1 px-2 rounded-lg shadow-sm font-bold text-white`}
-          >
-            Renomear
-          </button>
-        </div>
+        <InputRename addRename={addRename} renameKey={addRemameWithKey} />
         {/* Textarea */}
-        <div className="w-full desktopMini:w-4/5 h-auto flex items-center gap-3 flex-col ">
-          <textarea
-            value={descrebe}
-            onKeyDown={addDescribeWithKey}
-            onChange={(e) => setDescrebe(e.target.value)}
-            className="dark:bg-zinc-800 bg-gray-200 dark:border-none border border-gray-300 rounded-lg w-full shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3"
-            placeholder="Digite uma descrição para sua tarefa..."
-            name=""
-            id=""
-            cols={30}
-            rows={10}
-          ></textarea>
-          <button
-            disabled={descrebe === "" ? true : false}
-            onClick={addDescrebe}
-            className={`self-end ${
-              descrebe === "" ? "bg-gray-400" : "bg-blue-400"
-            } font-bold w-fit h-fit px-4 py-1 rounded-lg text-white`}
-          >
-            Salvar
-          </button>
-        </div>
+        <TextArea
+          addDescrebe={addDescrebe}
+          addDescrebeWithKey={addDescribeWithKey}
+          descrebe={descrebe}
+          setDescrebe={setDescrebe}
+        />
         {/* Description */}
-        <div className="bg-gray-200 border border-gray-300 dark:border-none dark:bg-zinc-800 w-full desktopMini:w-4/5 h-auto p-4 rounded-lg shadow-md flex items-center ">
-          {idx !== null &&
-          task !== undefined &&
-          task[idx] &&
-          task[idx].descricao !== "" ? (
-            <>{task[idx].descricao}</>
-          ) : (
-            <>
-              <p className="italic">Sem descrição</p>
-            </>
-          )}
-        </div>
+        <Description idx={idx} task={task} />
         {/* Priority */}
-        <div className="flex flex-col gap-4 dark:bg-zinc-800 bg-gray-200 border border-gray-300 dark:border-none rounded-md p-4 shadow-md w-full desktopMini:w-4/5">
-          <div>
-            <p className="font-bold">Prioridade:</p>
-          </div>
-          <div className="flex gap-4 justify-center items-center">
-            {idx !== null && task !== undefined && task[idx] ? (
-              <>
-                <button
-                  onClick={() => {
-                    PriorityFunction("bg-blue-500");
-                  }}
-                  className={`w-fit ${
-                    task[idx].prioridade === "bg-blue-500"
-                      ? "bg-blue-500"
-                      : "bg-transparent"
-                  } ${
-                    task[idx].prioridade === "bg-blue-500"
-                      ? "text-white"
-                      : "text-blue-500"
-                  }  border  hover:text-white hover:bg-blue-600 border-blue-600 h-fit rounded-md px-3 py-1`}
-                >
-                  Baixa
-                </button>
-                <button
-                  onClick={() => {
-                    PriorityFunction("bg-yellow-500");
-                  }}
-                  className={`w-fit ${
-                    task[idx].prioridade === "bg-yellow-500"
-                      ? "bg-yellow-500"
-                      : "bg-transparent"
-                  } ${
-                    task[idx].prioridade === "bg-yellow-500"
-                      ? "text-white"
-                      : "text-yellow-600"
-                  } border  hover:text-white hover:bg-yellow-600 border-yellow-600 rounded-md h-fit px-3 py-1`}
-                >
-                  Médio
-                </button>
-                <button
-                  onClick={() => {
-                    PriorityFunction("bg-red-500");
-                  }}
-                  className={`w-fit ${
-                    task[idx].prioridade === "bg-red-500"
-                      ? "bg-red-500"
-                      : "bg-transparent"
-                  } ${
-                    task[idx].prioridade === "bg-red-500"
-                      ? "text-white"
-                      : "text-red-500"
-                  } border  hover:text-white hover:bg-red-600 border-red-600 rounded-md h-fit px-3 py-1`}
-                >
-                  Alta
-                </button>
-              </>
-            ) : null}
-          </div>
-        </div>
+        <Priority PriorityFunction={PriorityFunction} idx={idx} task={task} />
         {/* Delet button */}
-        <div className="w-full desktopMini:w-4/5 text-white flex justify-center items-center p-4 border border-red-600 bg-red-400 rounded-lg shadow-md">
-          <button
-            onClick={() =>
-              setDisplayControl({
-                ...displayControl,
-                visible: "flex",
-                blur: true,
-              })
-            }
-            className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg"
-          >
-            Excluir tarefa
-          </button>
-        </div>
+        <DeleteButton
+          displayControl={displayControl}
+          setDisplayControl={setDisplayControl}
+        />
       </nav>
       {/* Modal warn */}
-      <div
-        className={`absolute ${displayControl.visible} text-white flex tablet:left-[15%] gap-4 items-center flex-col p-4  bg-zinc-800 z-10  desktop:w-[45%] desktop:left-[29%] desktopMini:left-[27%] desktopMini:w-[50%] tablet:h-fit tablet:bg-zinc-700 tablet:top-[10%] tablet:rounded-lg tablet:w-[70%] w-full h-full shadow-md`}
-      >
-        <div className="flex w-full items-center justify-between">
-          <button disabled className="w-[16px] opacity-0"></button>
-          <h1 className="font-bold">Aviso</h1>
-          <svg
-            onClick={() =>
-              setDisplayControl({
-                ...displayControl,
-                visible: "hidden",
-                blur: false,
-              })
-            }
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-x-lg"
-            viewBox="0 0 16 16"
-          >
-            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-          </svg>
-        </div>
-        <p>
-          Após excluir uma tarefa não é possível mais recuperá-la. Antes de
-          excluir uma terafa tenha certeza de quê realmente deseja fazer isso.
-          Caso tenha mudado de ideia, basta apertar o &quot;x&quot;.
-        </p>
-        <div className="bg-red-400 text-white font-normal border border-red-600 w-full p-4 shadow-md rounded-md">
-          A tarefa será excluída e você perderá todas as suas personalizações
-          como descrição e prioridade. Tenha em mente que você irá excluir
-          apenas está tarefa, e não todas. Caso queria prosseguir com a ação,
-          aperte o botão abaixo.
-        </div>
-        <button
-          onClick={RemoveTask}
-          className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg"
-        >
-          Excluir
-        </button>
-      </div>
+      <ModalWarn
+        displayControl={displayControl}
+        setDisplayControl={setDisplayControl}
+        removeTask={RemoveTask}
+      />
     </>
   );
 };
