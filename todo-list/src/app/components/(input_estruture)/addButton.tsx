@@ -1,4 +1,4 @@
-export const AddButton = ({setElementStorage}:{setElementStorage: () => Promise<void>}) => {
+export const AddButton = ({setElementStorage}:{setElementStorage: () => Promise<unknown>}) => {
     return (
         <div className="flex justify-center w-full items-center">
             <button

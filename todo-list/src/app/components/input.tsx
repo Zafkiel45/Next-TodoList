@@ -13,6 +13,7 @@ import { AddButton } from "./(input_estruture)/addButton";
 import { DeleteButton } from "./(input_estruture)/deleteButton";
 import { SwithOrder } from "./(input_estruture)/switchOrder";
 import { Modal } from "./(input_estruture)/Modal";
+import { useIndexedDB } from "./(database)/useOpenDB";
 
 export interface controler {
   visible: string;
@@ -23,7 +24,6 @@ export const InputTask = () => {
   const [displayControl, setDisplayControl] = useState<controler>({
     visible: "hidden",
   });
-
   const {
     setBlur,
     blur,
@@ -35,69 +35,47 @@ export const InputTask = () => {
     toggleSideBarFunction,
     task,
   } = useContext(todoContext);
+ 
+  // ===========================================================================
+  useIndexedDB('tasks', 'database');
+  const addElementInDB = async () => {
+    const currentDataBase:IDBOpenDBRequest = indexedDB.open('database');
 
-  useEffect(() => {
-    const Storage = JSON.parse(localStorage.getItem(key) || "[]");
+      currentDataBase.onsuccess = () => {
+        console.log("banco de dados aberto!");
+        const request = currentDataBase.result;
+        const database = request.transaction('tasks','readwrite');
+        const objectStorage = database.objectStore('tasks');
+        const currentObjects = []
+        
+        objectStorage.add({
+          title: name, 
+          priority: 'height',
+          description: descrebe,
+        });
 
-    try {
-      if (!Storage) {
-        throw new Error("Ocorreu um erro ao tentar inicializar sua lista");
+        objectStorage.openCursor().onsuccess = (event) => {
+          const cursor: IDBCursorWithValue | null = (event.target as IDBRequest)
+            .result;
+  
+          if (cursor) {
+            currentObjects.push(cursor.value);
+            cursor.continue();
+          } else {
+            console.log("don't more entries!");
+            setTask(currentObjects);
+          }
+        };
       }
-      setTask(Storage);
-    } catch (erro) {
-      console.log(
-        `o seguinte erro ocorreu ao tentar inicializar sua lista ${erro}`
-      );
-    }
-  }, [key]);
 
-  const setElementStorage = useCallback(async () => {
-    const Storage = await JSON.parse(localStorage.getItem(key) || "[]");
-    const NameSeem = await Storage.find((item: { nome: string }) => {
-      return item.nome === name;
-    });
-
-    interface currentObjectErros {
-      nameSeem: boolean | undefined;
-      nameLength: boolean;
-      nameVoid: boolean;
-      nameSpace: boolean;
-    }
-
-    const objectError: currentObjectErros = {
-      nameSeem: NameSeem != undefined,
-      nameLength: name.length >= 25,
-      nameVoid: name === "",
-      nameSpace: name.trim() === "",
-    };
-
-    if (
-      objectError.nameSeem ||
-      objectError.nameVoid ||
-      objectError.nameLength ||
-      objectError.nameSpace
-    ) {
-      setName(() => "");
-      window.alert(
-        "[ERRO] \n - Não é possível adicionar o mesmo nome para uma outra tarefa;\n -Não é possível deixar o nome da tarefa em branco;\n - Não é possível escrever nomes com mais de 30 caracteres; \n - Não é permitido apenas espaços em branco;"
-      );
-    } else {
-      Storage.unshift({
-        nome: name,
-        descricao: descrebe,
-        prioridade: "fill-gray-300",
-      });
-
-      localStorage.setItem(key, JSON.stringify(Storage));
-      setName(() => "");
-      setTask(() => Storage);
-      toggleSideBarFunction();
-    }
-  }, [name, descrebe]);
-
+      currentDataBase.onerror = () => {
+        console.log("ops, algo deu errado!"); 
+      } 
+  }
+  // ===========================================================================
   const keyPressEvent = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setElementStorage();
+      addElementInDB();
       toggleSideBarFunction();
       event.currentTarget.blur();
     }
@@ -156,7 +134,7 @@ export const InputTask = () => {
         {/* task input */}
         <InputNameTask keyEvent={keyPressEvent} />
         {/* add button */}
-        <AddButton setElementStorage={setElementStorage} />
+        <AddButton setElementStorage={addElementInDB} />
         {/* delete button */}
         <DeleteButton controlElementsDisplay={controlElementsDisplay} />
         {/* order */}

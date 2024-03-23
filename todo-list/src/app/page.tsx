@@ -6,6 +6,7 @@ import { AllElements } from "./components/utility/fatherMode";
 import { CloseTasksButton } from "./components/(main_estruture)/closeTasksButton";
 import { MainContainerInputs } from "./components/(main_estruture)/mainContainerInputs";
 import { MainContainerTasks } from "./components/(main_estruture)/mainContainerTasks";
+import { useIndexedDB } from "./components/(database)/useOpenDB";
 
 export default function Home() {
 
@@ -26,6 +27,9 @@ export default function Home() {
   const toggleSideBarFunctionReverse = ():void => {
     setToggleSideBar('left-0')
   }
+
+ 
+  
   return (
     <AllElements>
       <todoContext.Provider value={{
