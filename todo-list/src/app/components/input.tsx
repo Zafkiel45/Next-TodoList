@@ -46,8 +46,23 @@ export const InputTask = () => {
         const request = currentDataBase.result;
         const database = request.transaction('tasks','readwrite');
         const objectStorage = database.objectStore('tasks');
-        const currentObjects = []
-        
+        const currentObjects = [];
+
+        database.onerror = () => {
+          window.alert("mesmo nome!")
+        }
+
+        if(
+          name === '' || 
+          name.trim() === '' || 
+          name.length === 25 
+        ) {
+          window.alert("nome vazio!");
+          setName('');
+          database.abort();
+          return;
+        }
+
         objectStorage.add({
           title: name, 
           priority: 'height',
@@ -62,8 +77,8 @@ export const InputTask = () => {
             currentObjects.push(cursor.value);
             cursor.continue();
           } else {
-            console.log("don't more entries!");
             setTask(currentObjects);
+            setName('')
           }
         };
       }
