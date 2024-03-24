@@ -82,10 +82,26 @@ export const InputTask = () => {
   };
 
   const removeAllElements = (): void => {
-    localStorage.removeItem(key);
-    setTask(() => []);
-    setBlur(() => false);
-    setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
+    const openDatabase: IDBOpenDBRequest = indexedDB.open('database');
+    
+    openDatabase.onsuccess = () => {
+      const database: IDBDatabase = openDatabase.result;
+      const transaction: IDBTransaction = database.transaction("tasks", "readwrite");
+      const objectStore: IDBObjectStore = transaction.objectStore("tasks");
+  
+     const clearDatabase = objectStore.clear();
+  
+     clearDatabase.onsuccess = () => {
+      console.log("database deleted with sucesss");
+     }
+     clearDatabase.onerror = () => {
+      console.log("database is'n deleted");
+     }
+  
+      setTask(() => []);
+      setBlur(() => false);
+      setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
+    }
   };
 
   const controlElementsDisplay = () => {
