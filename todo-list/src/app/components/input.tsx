@@ -1,8 +1,6 @@
 import {
   useContext,
-  useEffect,
   useState,
-  useCallback,
   KeyboardEvent,
 } from "react";
 import { todoContext } from "./context";
