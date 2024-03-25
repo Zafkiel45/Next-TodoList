@@ -13,11 +13,13 @@ interface myContextType {
     sideBar: SideBar;
     title: number | null;
     indexed: number | null;
+    rename: string;
 }
 interface setTypeDispatch {
     setTask: React.Dispatch<React.SetStateAction<any[]>>;
     setName: React.Dispatch<React.SetStateAction<string>>;
     setBlur: React.Dispatch<React.SetStateAction<boolean>>;
+    setRename: React.Dispatch<React.SetStateAction<string>>;
     setSideBar: React.Dispatch<React.SetStateAction<SideBar>>;
     setDescrebe: React.Dispatch<React.SetStateAction<string>>;
     setTitle: React.Dispatch<React.SetStateAction<number | null>>;

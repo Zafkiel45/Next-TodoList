@@ -12,8 +12,8 @@ export const Modal = () => {
   const {
     key,
     setSideBar,
-    name,
-    setName,
+    rename,
+    setRename,
     setTask,
     sideBar,
     descrebe,
@@ -62,7 +62,26 @@ export const Modal = () => {
   };
   // The function responsible about the rename setting
   const addRename = (): void => {
- 
+    const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
+
+    openDatabase.onsuccess = () => {
+      const request:IDBDatabase = openDatabase.result;
+      const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
+      const store:IDBObjectStore = transaction.objectStore("tasks");
+      const element:IDBRequest = store.get(title);
+
+      element.onsuccess = (event) => {
+        const elementTarget = (event.target as IDBRequest).result;
+        elementTarget.title = rename;
+
+        store.put(elementTarget).onsuccess = () => {
+          console.log("rename is finished!")
+          setRename("");
+        }
+      }
+
+      UpdateDB(setTask, undefined, undefined);
+    }
   };
   // The function responsible for delete a individual task
   const RemoveTask = () => {

@@ -15,6 +15,7 @@ export default function Home() {
   const [name, setName] = useState('');
   const [title, setTitle] = useState(null);
   const [blur, setBlur] = useState(false);
+  const [rename, setRename] = useState('');
   const [descrebe, setDescrebe] = useState('');
   const [indexed, setIndexed] = useState(null);
   const [sideBar, setSideBar] = useState({
@@ -50,6 +51,8 @@ export default function Home() {
         setTitle,
         indexed,
         setIndexed,
+        rename, 
+        setRename
       }}>
         <div className="flex ">
           <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />

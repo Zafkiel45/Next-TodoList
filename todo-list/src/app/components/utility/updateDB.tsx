@@ -23,11 +23,14 @@ export const UpdateDB = (
         console.log("updateDB working!");
         setTask(currentObject);
 
-        if(setName === undefined) {
-            setDescrebe("");
-        } else {
-            setName("");
+        if(setName) {
+          setName("");
         }
+
+        if(setDescrebe) {
+          setDescrebe("")
+        }
+        
       }
     };
   };
