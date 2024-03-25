@@ -9,9 +9,9 @@ import { CloseButton } from "./(input_estruture)/closeButton";
 import { InputNameTask } from "./(input_estruture)/inputNameTask";
 import { AddButton } from "./(input_estruture)/addButton";
 import { DeleteButton } from "./(input_estruture)/deleteButton";
-import { SwithOrder } from "./(input_estruture)/switchOrder";
 import { Modal } from "./(input_estruture)/Modal";
 import { useIndexedDB } from "./(database)/useOpenDB";
+import { UpdateDB } from "./utility/updateDB";
 
 export interface controler {
   visible: string;
@@ -44,8 +44,7 @@ export const InputTask = () => {
         const request = currentDataBase.result;
         const database = request.transaction('tasks','readwrite');
         const objectStorage = database.objectStore('tasks');
-        const currentObjects = [];
-
+        
         database.onerror = () => {
           window.alert("mesmo nome!")
         }
@@ -67,18 +66,7 @@ export const InputTask = () => {
           description: descrebe,
         });
 
-        objectStorage.openCursor().onsuccess = (event) => {
-          const cursor: IDBCursorWithValue | null = (event.target as IDBRequest)
-            .result;
-  
-          if (cursor) {
-            currentObjects.push(cursor.value);
-            cursor.continue();
-          } else {
-            setTask(currentObjects);
-            setName('')
-          }
-        };
+        UpdateDB(setTask, setName);
       }
 
       currentDataBase.onerror = () => {
@@ -93,7 +81,7 @@ export const InputTask = () => {
       event.currentTarget.blur();
     }
   };
-
+  // ===========================================================================
   const removeAllElements = (): void => {
     const openDatabase: IDBOpenDBRequest = indexedDB.open('database');
     
@@ -116,35 +104,12 @@ export const InputTask = () => {
       setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
     }
   };
-
+  // ===========================================================================
   const controlElementsDisplay = () => {
     setDisplayControl({ ...displayControl, visible: "flex" });
     setBlur(() => true);
   };
-
-  const sortElements = async (a: number, b: number, c: number, d: number) => {
-    const Storage = await JSON.parse(localStorage.getItem(key) || "[]");
-
-    const levelPriority = {
-      "bg-red-500": a,
-      "bg-yellow-500": b,
-      "bg-blue-500": c,
-      "fill-gray-300": d,
-    };
-
-    interface currentPriority {
-      prioridade: string | number;
-    }
-
-    Storage.sort(
-      (one: currentPriority, two: currentPriority) =>
-        levelPriority[one.prioridade] - levelPriority[two.prioridade]
-    );
-    localStorage.setItem(key, JSON.stringify(Storage));
-    setTask(() => Storage);
-    toggleSideBarFunction();
-  };
-
+  // ===========================================================================
   return (
     <>
       <div
@@ -167,7 +132,7 @@ export const InputTask = () => {
         {/* delete button */}
         <DeleteButton controlElementsDisplay={controlElementsDisplay} />
         {/* order */}
-        <SwithOrder sortElements={sortElements} />
+       
         <SwitchModeButton />
       </div>
       <Modal

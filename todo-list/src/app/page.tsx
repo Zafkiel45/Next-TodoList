@@ -13,9 +13,10 @@ export default function Home() {
   const key = 'tasks';
   const [task, setTask] = useState([]);
   const [name, setName] = useState('');
-  const [idx, setIdx] = useState(null);
+  const [title, setTitle] = useState(null);
   const [blur, setBlur] = useState(false);
   const [descrebe, setDescrebe] = useState('');
+  const [indexed, setIndexed] = useState(null);
   const [sideBar, setSideBar] = useState({
     position:'right-[-200%]',
     display: 'hidden',
@@ -45,8 +46,10 @@ export default function Home() {
         sideBar, 
         descrebe, 
         setDescrebe, 
-        idx, 
-        setIdx
+        title, 
+        setTitle,
+        indexed,
+        setIndexed,
       }}>
         <div className="flex ">
           <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />

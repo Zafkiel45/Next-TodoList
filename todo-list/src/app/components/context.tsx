@@ -11,7 +11,8 @@ interface myContextType {
     blur: boolean;
     descrebe: string;
     sideBar: SideBar;
-    idx: number | null;
+    title: number | null;
+    indexed: number | null;
 }
 interface setTypeDispatch {
     setTask: React.Dispatch<React.SetStateAction<any[]>>;
@@ -19,7 +20,8 @@ interface setTypeDispatch {
     setBlur: React.Dispatch<React.SetStateAction<boolean>>;
     setSideBar: React.Dispatch<React.SetStateAction<SideBar>>;
     setDescrebe: React.Dispatch<React.SetStateAction<string>>;
-    setIdx: React.Dispatch<React.SetStateAction<number | null>>;
+    setTitle: React.Dispatch<React.SetStateAction<number | null>>;
+    setIndexed: React.Dispatch<React.SetStateAction<number | null>>
 }
 interface methodsType extends myContextType, setTypeDispatch{
     toggleSideBarFunction: () => void;

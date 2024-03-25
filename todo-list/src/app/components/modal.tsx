@@ -4,9 +4,9 @@ import { CloseButton } from "./(input_estruture)/closeButton";
 import { InputRename } from "./(modal_estruture)/inputRename";
 import { TextArea } from "./(modal_estruture)/textArea";
 import { Description } from "./(modal_estruture)/Description";
-import { Priority } from "./(modal_estruture)/setPriority";
 import { DeleteButton } from "./(modal_estruture)/delete_button";
 import { ModalWarn } from "./(modal_estruture)/Modal_warn";
+import { UpdateDB } from "./utility/updateDB";
 
 export const Modal = () => {
   const {
@@ -18,8 +18,9 @@ export const Modal = () => {
     sideBar,
     descrebe,
     setDescrebe,
-    idx,
+    title,
     task,
+    indexed
   } = useContext(todoContext);
 
   const [displayControl, setDisplayControl] = useState({
@@ -36,76 +37,36 @@ export const Modal = () => {
   };
   // The function responsible of adding a description of a task
   const addDescrebe = (): void => {
-    const Storage = JSON.parse(localStorage.getItem(key) || "[]");
+    const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
 
-    if (Storage[idx]) {
-      Storage[idx].descricao = descrebe;
-      localStorage.setItem(key, JSON.stringify(Storage));
-      setTask(() => Storage);
-      setDescrebe(() => "");
+    openDatabase.onsuccess = () => {
+      const request:IDBDatabase = openDatabase.result;
+      const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
+      const store:IDBObjectStore = transaction.objectStore("tasks");
+      const element:IDBRequest = store.get(title);
+
+      element.onerror = () => {
+        console.log("erro ao buscar o elemento!");
+      }
+      element.onsuccess = (event) => {
+        console.log("elemento obtido com sucesso!");
+        const currentTarget = (event.target as IDBRequest).result;
+        currentTarget.description = descrebe; 
+
+        store.put(currentTarget).onsuccess = () => { 
+          UpdateDB(setTask, undefined, setDescrebe);
+        }
+      }
+
     }
   };
   // The function responsible about the rename setting
   const addRename = (): void => {
-    const Storage = JSON.parse(localStorage.getItem(key) || "[]");
-
-    try {
-      if (!Storage) {
-        throw new Error(
-          "ocorreu um erro com o banco de dados ao tentar renomear esta tarefa"
-        );
-      }
-
-      if (Storage[idx] && name.length <= 30) {
-        Storage[idx].nome = name;
-        localStorage.setItem(key, JSON.stringify(Storage));
-        setTask(() => Storage);
-        setName(() => "");
-      } else {
-        window.alert("ERRO - Excedeu a quantidade de caracteres permitada.");
-        setName(() => "");
-      }
-    } catch (error) {}
-  };
-  // The function responsible for adding the priority to for a task
-  const PriorityFunction = (tag: string) => {
-    const Storage = JSON.parse(localStorage.getItem(key) || "[]");
-
-    try {
-      if (!Storage) {
-        throw new Error(
-          "ocorreu um erro com o banco de dados ao alterar a prioridade da tarefa"
-        );
-      }
-
-      if (Storage[idx]) {
-        Storage[idx].prioridade = tag;
-        localStorage.setItem(key, JSON.stringify(Storage));
-        setTask(() => Storage);
-      }
-    } catch (error) {
-      console.log("ocorreu um erro " + error);
-    }
+ 
   };
   // The function responsible for delete a individual task
   const RemoveTask = () => {
-    const Storage = JSON.parse(localStorage.getItem(key) || "[]");
 
-    try {
-      if (!Storage) {
-        throw new Error("Ocorreu um erro ao remover o item da lista");
-      }
-
-      const filtedStorage = Storage.filter((element: any, idxs: number) => {
-        return idx !== idxs;
-      });
-      localStorage.setItem(key, JSON.stringify(filtedStorage));
-      setTask(() => filtedStorage);
-      setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
-      toggleSideBar();
-    } catch ({ name, mensage }) {
-      console.log(`ocorreu o seguinte erro ${mensage} com o nome dê ${name}`);
-    }
   };
   // key events
   const addDescribeWithKey = (e: { key: string }) => {
@@ -141,9 +102,9 @@ export const Modal = () => {
           setDescrebe={setDescrebe}
         />
         {/* Description */}
-        <Description idx={idx} task={task} />
+        <Description indexed={indexed} task={task} />
         {/* Priority */}
-        <Priority PriorityFunction={PriorityFunction} idx={idx} task={task} />
+        
         {/* Delet button */}
         <DeleteButton
           displayControl={displayControl}
