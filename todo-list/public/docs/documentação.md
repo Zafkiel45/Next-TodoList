@@ -18,3 +18,44 @@ import { useContext, useState, KeyboardEvent,} from "react";
 ```
 Aqui importamos os hooks necessário e o `KeyboardEvent` para tipar um evento de 
 `key`.
+### Outros imports 
+
+```tsx
+import { todoContext } from "./context";
+import { SwitchModeButton } from "./(input_estruture)/switch_button";
+import { CloseButton } from "./(input_estruture)/closeButton";
+import { InputNameTask } from "./(input_estruture)/inputNameTask";
+import { AddButton } from "./(input_estruture)/addButton";
+import { DeleteButton } from "./(input_estruture)/deleteButton";
+import { Modal } from "./(input_estruture)/Modal";
+import { useIndexedDB } from "./(database)/useOpenDB";
+import { UpdateDB } from "./utility/updateDB";
+```
+Temos uma série de coisas sendo importadas aqui. Sendo elas: 
+
+- TodoContext: Para pegar os dados do contexto relacionados ao `TodoList`.
+
+> [!Note]
+> Posteriormente abstrair mais os contextos e torna-los mais coerentes. 
+
+> SwitchModeButton: Componente reponsável por alternar entre modo claro e escuro.
+
+> CloseButton: Componente responsável por esconder o container dos inputs em 
+dispositivos mobiles. 
+
+> InputNameTask: Componente responsável por capturar o texto dentro do input e 
+atualizar o atual "title" da tasks (seria o nome da task).
+
+> AddButton: Componente responsável por adicionar elementos dentro do IndexedDB
+
+> DeleteButton: Componente responsável por remover todos os elementos do IndexedDB
+
+> Modal: Componente responsável por aviso do perigo de apagar todas as tasks do
+banco de dados.
+
+> UseIndexedDB: Responsável por criar o banco de dados e configurar o schema dele.
+
+> UpdateDB: Função responsável por atualizar os elementos do banco de dados para
+o usuário! 
+
+
