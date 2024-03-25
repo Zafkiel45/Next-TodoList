@@ -10,7 +10,6 @@ import { UpdateDB } from "./utility/updateDB";
 
 export const Modal = () => {
   const {
-    key,
     setSideBar,
     rename,
     setRename,
@@ -85,6 +84,25 @@ export const Modal = () => {
   };
   // The function responsible for delete a individual task
   const RemoveTask = () => {
+    const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
+
+    openDatabase.onsuccess = () => {
+      const request:IDBDatabase = openDatabase.result;
+      const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
+      const store:IDBObjectStore = transaction.objectStore("tasks");
+      const element:IDBRequest = store.delete(title);
+
+      element.onsuccess = () => {
+        console.log("elemento removido com sucesso!");
+        setDisplayControl({
+          ...displayControl,
+          visible: "hidden",
+          blur: false,
+        })
+        toggleSideBar()
+        UpdateDB(setTask);
+      }
+    }
 
   };
   // key events
