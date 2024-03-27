@@ -36,26 +36,28 @@ Temos uma série de coisas sendo importadas aqui. Sendo elas:
 - TodoContext: Para pegar os dados do contexto relacionados ao `TodoList`.
 
 > [!Note]
-> Posteriormente abstrair mais os contextos e torna-los mais coerentes. 
+> Posteriormente abstrair mais os contextos e torna-los mais coerentes. Antes 
+de tudo, certifique-se se faz sentido criar um novo contexto e mantenha o 
+atual estado do projeto (em produção) seguro enquanto atualiza. 
 
-> SwitchModeButton: Componente reponsável por alternar entre modo claro e escuro.
+- SwitchModeButton: Componente reponsável por alternar entre modo claro e escuro.
 
-> CloseButton: Componente responsável por esconder o container dos inputs em 
+- CloseButton: Componente responsável por esconder o container dos inputs em 
 dispositivos mobiles. 
 
-> InputNameTask: Componente responsável por capturar o texto dentro do input e 
+- InputNameTask: Componente responsável por capturar o texto dentro do input e 
 atualizar o atual "title" da tasks (seria o nome da task).
 
-> AddButton: Componente responsável por adicionar elementos dentro do IndexedDB
+- AddButton: Componente responsável por adicionar elementos dentro do IndexedDB
 
-> DeleteButton: Componente responsável por remover todos os elementos do IndexedDB
+- DeleteButton: Componente responsável por remover todos os elementos do IndexedDB
 
-> Modal: Componente responsável por aviso do perigo de apagar todas as tasks do
+- Modal: Componente responsável por aviso do perigo de apagar todas as tasks do
 banco de dados.
 
-> UseIndexedDB: Responsável por criar o banco de dados e configurar o schema dele.
+- UseIndexedDB: Responsável por criar o banco de dados e configurar o schema dele.
 
-> UpdateDB: Função responsável por atualizar os elementos do banco de dados para
+- UpdateDB: Função responsável por atualizar os elementos do banco de dados para
 o usuário! 
 
 
