@@ -67,6 +67,7 @@ export const InputTask = () => {
         });
 
         UpdateDB(setTask, setName);
+        toggleSideBarFunction();
       }
 
       currentDataBase.onerror = () => {
