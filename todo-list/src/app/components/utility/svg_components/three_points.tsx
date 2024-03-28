@@ -1,12 +1,14 @@
-function Points({ fill }) {
+function Points({ 
+  fill,
+  height = "h-[29px]",
+  width = "h-[29px]"
+}) {
     return (
       <svg
-        width={29}
-        height={29}
         viewBox="0 0 29 29"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${fill}`}
+        className={`${fill} ${height} ${width}`}
       >
         <path
           fillRule="evenodd"

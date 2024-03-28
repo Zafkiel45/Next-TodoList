@@ -1,12 +1,14 @@
-function Search({ fill }) {
+function Search({ 
+  fill,
+  height = "h-[32px]",
+  width = "h-[32px]" 
+}) {
     return (
       <svg
-        width={32}
-        height={32}
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${fill}`}
+        className={`${fill} ${height} ${width}`}
       >
         <path
           fillRule="evenodd"

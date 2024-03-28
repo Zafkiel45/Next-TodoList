@@ -1,12 +1,14 @@
-function Unknown({ fill }) {
+function Unknown(
+  { fill,
+    height = "h-[57px]",
+    width = "h-[57px]" 
+  }) {
     return (
       <svg
-        width={57}
-        height={57}
         viewBox="0 0 57 57"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${fill}`}
+        className={`${fill} ${height} ${width}`}
       >
         <path
           fillRule="evenodd"

@@ -1,4 +1,8 @@
-function Rename({fill}) {
+function Rename({
+  fill,
+  height = "h-[38px]",
+  width = "h-[38]" 
+  }) {
     return (
       <svg
         width={38}
@@ -6,7 +10,7 @@ function Rename({fill}) {
         viewBox="0 0 38 38"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${fill}`}
+        className={`${fill} ${height} ${width}`}
       >
         <path
           fillRule="evenodd"

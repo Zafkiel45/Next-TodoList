@@ -1,4 +1,8 @@
-function SvgComponent({fill}) {
+function Danger({
+  fill,
+  height = "h-[32px]",
+  width = "h-[34px]"
+}) {
     return (
       <svg
         width={40}
@@ -6,7 +10,7 @@ function SvgComponent({fill}) {
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${fill}`}
+        className={`${fill} ${height} ${width}`}
       >
         <path
           fillRule="evenodd"
@@ -18,4 +22,4 @@ function SvgComponent({fill}) {
     )
   }
   
-  export default SvgComponent
+  export default Danger

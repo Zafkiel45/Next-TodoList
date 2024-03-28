@@ -1,8 +1,11 @@
-import { Inter } from 'next/font/google'
+import { JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = JetBrains_Mono({ 
+  subsets: ['latin'],
+  display: "swap", 
+})
 
 export const metadata = {
   title: 'todoList',
@@ -12,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }:Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="pt-br" className='h-screen w-screen flex justify-center items-center '>
-      <body className={`${inter.className} h-screen w-screen flex justify-center items-center `}>
+      <body className={`${inter.className}   h-screen w-screen flex justify-center items-center `}>
         {children}
         <Analytics/>
       </body>

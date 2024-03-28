@@ -54,7 +54,7 @@ export default function Home() {
         rename, 
         setRename
       }}>
-        <div className="flex ">
+        <div className="flex">
           <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />
           <MainContainerInputs toggleSideBar={toggleSideBar} />
           <Modal/>

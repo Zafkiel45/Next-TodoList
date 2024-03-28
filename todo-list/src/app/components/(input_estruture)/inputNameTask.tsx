@@ -16,8 +16,26 @@ export const InputNameTask = ({keyEvent}:TypeOfProps) => {
                 value={name}
                 onKeyDown={keyEvent}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Digite uma tarefa..."
-                className={`placeholder:text-gray-500 dark:placeholder:text-zinc-400 transition-all  focus:border focus:border-blue-400 placeholder:text-xs w-4/5 shadow-md px-3 py-2 text-black dark:text-white font-normal rounded-md bg-gray-200 dark:bg-zinc-800`}
+                placeholder="Digite um nome..."
+                aria-label="inserir o nome da tarefa"
+                className={`
+                placeholder:text-[#5B5757] 
+                placeholder:font-semibold
+                dark:placeholder:text-[#BA8AEB] 
+                transition-all  focus:border border 
+                border-[#818181] 
+                dark:border-[#6C567D] 
+                placeholder:text-xs 
+                w-4/5 shadow-md 
+                px-3 
+                py-2 
+                text-black 
+                dark:text-white 
+                font-normal 
+                rounded-md 
+                bg-[#D9D9D9] 
+                dark:bg-[#161319]
+            `}
             />
       </div>
     )
