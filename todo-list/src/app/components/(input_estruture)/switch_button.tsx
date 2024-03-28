@@ -12,10 +12,12 @@ export const SwitchModeButton = () => {
           if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
               document.documentElement.classList.remove('light');
               localStorage.ThemeStorage = 'dark'
+              setCurrentState('dark')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           } else {
               document.documentElement.classList.remove('dark');
               localStorage.ThemeStorage= 'light'
+              setCurrentState('light')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           }
 

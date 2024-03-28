@@ -51,7 +51,16 @@ export const Modal = ({
       {/* Close button */}
       <div className="flex w-full items-center justify-between">
         <button disabled className="w-[24px] h-[24px] opacity-0"></button>
-        <h1 className="font-bold text-lg dark:text-[#F06868] mobileMini:text-xl">AVISO!</h1>
+        <h1 
+          className="
+            font-bold 
+            text-lg 
+            text-orange-400 
+            dark:text-[#F06868] 
+            mobileMini:text-xl"
+        >
+          AVISO!
+        </h1>
         <div onClick={() => {
             dispatch({ ...objectComplete, visible: "hidden" });
             Blur(() => false);
@@ -63,7 +72,7 @@ export const Modal = ({
         Se você continuar, todas as suas tarefas serão apagadas! Caso esteja
         procurando uma forma de apagar apenas 1 tarefa, feche este aviso, e clique
         na tarefa que você quer apagar, desça para o final e clique em apagar.
-        Caso não queira apagar nada, apenas feche este aviso. <span className="dark:text-[#F06868]">Caso você realmente
+        Caso não queira apagar nada, apenas feche este aviso. <span className="dark:text-[#F06868] text-orange-400">Caso você realmente
         queira apagar tudo, clique no botão abaixo.</span> 
         <br />
         <br />
