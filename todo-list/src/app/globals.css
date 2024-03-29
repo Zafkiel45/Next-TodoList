@@ -18,11 +18,11 @@ body, html {
 
 ::-webkit-scrollbar {
     background-color: transparent;
-    width: 10px;
+    width: 0px;
     border-radius: 1.25rem; /* 20px */
 }
 ::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 1.25rem;
-    width: 10px;
+    width: 0px;
 }

@@ -4,7 +4,11 @@ import { todoContext } from "../context"
 import { useContext } from "react"
 import { CloseButton } from "./buttonClose"
 
-export const HeaderInput = () => {
+export const HeaderInput = ({
+    title,
+}:{
+    title: string,
+}) => {
 
     const { toggleSideBarFunction } = useContext(todoContext);
 
@@ -13,7 +17,7 @@ export const HeaderInput = () => {
             <span className={`w-[20px]`}>
             </span>
             <span  className="text-lg text-black transition-all dark:text-white mobileMini:text-xl desktopMini:text-2xl">
-                Lista de Tarefas
+                {title}
             </span>
             <span>
                 <CloseButton toggleSideBarFunction={toggleSideBarFunction}/>

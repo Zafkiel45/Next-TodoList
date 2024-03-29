@@ -1,4 +1,5 @@
 import { SetStateAction } from "react";
+import PencilSvg from '../utility/svg_components/pencil';
 
 interface TypeOfProps {
   descrebe: string;
@@ -19,7 +20,22 @@ export const TextArea = ({
         value={descrebe}
         onKeyDown={addDescrebeWithKey}
         onChange={(e) => setDescrebe(e.target.value)}
-        className="dark:bg-zinc-800 bg-gray-200 dark:border-none border border-gray-300 rounded-lg w-full shadow-lg placeholder:text-zinc-500 placeholder:font-medium px-3 text-base py-3"
+        className="
+        placeholder:text-xs 
+        placeholder:text-[#5B5757] 
+        dark:border-[#6C567D]
+        dark:bg-[#161319]
+        dark:placeholder:text-[#BA8AEB]
+        border-[#818181]
+        bg-[#F8F8F8]
+        border 
+        rounded-lg 
+        w-full 
+        shadow-lg 
+        placeholder:font-medium 
+        px-3 
+        text-base 
+        py-3"
         placeholder="Digite uma descrição para sua tarefa..."
         name=""
         id=""
@@ -29,11 +45,24 @@ export const TextArea = ({
       <button
         disabled={descrebe === "" ? true : false}
         onClick={addDescrebe}
-        className={`self-end ${
-          descrebe === "" ? "bg-gray-400" : "bg-blue-400"
-        } font-bold w-fit h-fit px-4 py-1 rounded-lg text-white`}
+        className={`
+        self-end 
+        font-bold 
+        w-fit 
+        h-fit 
+        px-4 
+        py-1 
+        rounded-lg 
+        placeholder:text-[#5B5757] 
+        dark:border-[#6C567D]
+        dark:bg-[#161319]
+        dark:placeholder:text-[#BA8AEB]
+        border-[#818181]
+        bg-[#F8F8F8]
+        border 
+        `}
       >
-        Salvar
+        <PencilSvg/>
       </button>
     </div>
   );

@@ -1,4 +1,5 @@
 import { SetStateAction } from "react";
+import DangerSvg from "../utility/svg_components/danger";
 
 interface TypeOfProps {
   setDisplayControl: (
@@ -12,7 +13,36 @@ export const DeleteButton = ({
   displayControl,
 }: TypeOfProps) => {
   return (
-    <div className="w-full desktopMini:w-4/5 text-white flex justify-center items-center p-4 border border-red-600 bg-red-400 rounded-lg shadow-md">
+    <div
+      className="
+      w-full 
+      desktopMini:w-4/5 
+      dark:text-[#F06868]
+      flex 
+      flex-col
+      gap-3
+      justify-center 
+      items-center 
+      p-4 
+      border 
+      text-white
+      dark:border-[#A35757]
+      dark:bg-[#1F1414]
+      bg-[#933F3F]
+      rounded-lg 
+      shadow-md"
+    >
+      <div className="flex w-full justify-start gap-3">
+        <div>
+          <DangerSvg />
+        </div>
+        <div>Zona de parigo!</div>
+      </div>
+      <div className="text-sm">
+        Após deletar uma tarefa, ela nunca mais poderá ser recuperada novamente.
+        Caso não seja o que você deseja, evite esta área. Esta opção apagara
+        somente esta tarefa. Todas as outras permanecerão.
+      </div>
       <button
         onClick={() =>
           setDisplayControl({
@@ -21,9 +51,22 @@ export const DeleteButton = ({
             blur: true,
           })
         }
-        className="font-bold bg-red-500 w-fit h-fit px-4 py-1 shadow-md rounded-lg"
+        className="
+        font-bold 
+        dark:bg-[#C23E3E] 
+        text-white
+        w-fit 
+        border 
+        bg-[#ea2929]
+        border-[#561616]
+        h-fit 
+        px-5
+        py-1 
+        shadow-md 
+        rounded-lg
+        "
       >
-        Excluir tarefa
+        Deletar
       </button>
     </div>
   );

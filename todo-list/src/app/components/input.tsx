@@ -1,8 +1,4 @@
-import {
-  useContext,
-  useState,
-  KeyboardEvent,
-} from "react";
+import { useContext, useState, KeyboardEvent } from "react";
 import { todoContext } from "./context";
 import { SwitchModeButton } from "./(input_estruture)/switch_button";
 import { HowToUse } from "./(input_estruture)/howToUse";
@@ -31,49 +27,44 @@ export const InputTask = () => {
     setName,
     descrebe,
     toggleSideBarFunction,
-
   } = useContext(todoContext);
- 
+
   // ===========================================================================
-  useIndexedDB('tasks', 'database');
+  useIndexedDB("tasks", "database");
   const addElementInDB = async () => {
-    const currentDataBase:IDBOpenDBRequest = indexedDB.open('database');
+    const currentDataBase: IDBOpenDBRequest = indexedDB.open("database");
 
-      currentDataBase.onsuccess = () => {
-        console.log("banco de dados aberto!");
-        const request = currentDataBase.result;
-        const database = request.transaction('tasks','readwrite');
-        const objectStorage = database.objectStore('tasks');
-        
-        database.onerror = () => {
-          window.alert("mesmo nome!")
-        }
+    currentDataBase.onsuccess = () => {
+      console.log("banco de dados aberto!");
+      const request = currentDataBase.result;
+      const database = request.transaction("tasks", "readwrite");
+      const objectStorage = database.objectStore("tasks");
 
-        if(
-          name === '' || 
-          name.trim() === '' || 
-          name.length === 25 
-        ) {
-          window.alert("nome vazio!");
-          setName('');
-          database.abort();
-          return;
-        }
+      database.onerror = () => {
+        window.alert("mesmo nome!");
+      };
 
-        objectStorage.add({
-          title: name, 
-          priority: 'height',
-          description: descrebe,
-        });
-
-        UpdateDB(setTask, setName);
-        toggleSideBarFunction();
+      if (name === "" || name.trim() === "" || name.length === 25) {
+        window.alert("nome vazio!");
+        setName("");
+        database.abort();
+        return;
       }
 
-      currentDataBase.onerror = () => {
-        console.log("ops, algo deu errado!"); 
-      } 
-  }
+      objectStorage.add({
+        title: name,
+        priority: "height",
+        description: descrebe,
+      });
+
+      UpdateDB(setTask, setName);
+      toggleSideBarFunction();
+    };
+
+    currentDataBase.onerror = () => {
+      console.log("ops, algo deu errado!");
+    };
+  };
   // ===========================================================================
   const keyPressEvent = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -84,26 +75,29 @@ export const InputTask = () => {
   };
   // ===========================================================================
   const removeAllElements = (): void => {
-    const openDatabase: IDBOpenDBRequest = indexedDB.open('database');
-    
+    const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
+
     openDatabase.onsuccess = () => {
       const database: IDBDatabase = openDatabase.result;
-      const transaction: IDBTransaction = database.transaction("tasks", "readwrite");
+      const transaction: IDBTransaction = database.transaction(
+        "tasks",
+        "readwrite"
+      );
       const objectStore: IDBObjectStore = transaction.objectStore("tasks");
-  
-     const clearDatabase = objectStore.clear();
-  
-     clearDatabase.onsuccess = () => {
-      console.log("database deleted with sucesss");
-     }
-     clearDatabase.onerror = () => {
-      console.log("database is'n deleted");
-     }
-  
+
+      const clearDatabase = objectStore.clear();
+
+      clearDatabase.onsuccess = () => {
+        console.log("database deleted with sucesss");
+      };
+      clearDatabase.onerror = () => {
+        console.log("database is'n deleted");
+      };
+
       setTask(() => []);
       setBlur(() => false);
       setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
-    }
+    };
   };
   // ===========================================================================
   const controlElementsDisplay = () => {
@@ -114,12 +108,23 @@ export const InputTask = () => {
   return (
     <>
       <div
-        className={`flex pt-3 w-full transition-all ${
-          blur ? "blur-sm" : null
-        } h-fit items-center desktop:w-4/5 desktop:gap-2 mobileMini:gap-3 mobileMini:w-[90%] tablet:gap-5 flex-col gap-4`}
+        className={`
+        flex 
+        pt-3 
+        w-full 
+        transition-all 
+        ${blur ? "blur-sm" : null} 
+        h-fit items-center 
+        desktop:w-4/5 
+        desktop:gap-2 
+        mobileMini:gap-3
+        mobileMini:w-[90%] 
+        tablet:gap-5 
+        flex-col 
+        gap-4`}
       >
         {/* close button */}
-        <HeaderInput/>
+        <HeaderInput isModal={false} title="Lista de tarefas" />
         {/* task input */}
         <InputNameTask keyEvent={keyPressEvent} />
         {/* add button */}
@@ -127,9 +132,9 @@ export const InputTask = () => {
         {/* delete button */}
         <DeleteButton controlElementsDisplay={controlElementsDisplay} />
         {/* order */}
-       
+
         <SwitchModeButton />
-        <HowToUse/>
+        <HowToUse />
       </div>
       <Modal
         Blur={setBlur}

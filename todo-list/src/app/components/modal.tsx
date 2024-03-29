@@ -6,6 +6,7 @@ import { TextArea } from "./(modal_estruture)/textArea";
 import { Description } from "./(modal_estruture)/Description";
 import { DeleteButton } from "./(modal_estruture)/delete_button";
 import { ModalWarn } from "./(modal_estruture)/Modal_warn";
+import { HeaderOfModal } from "./(modal_estruture)/header";
 import { UpdateDB } from "./utility/updateDB";
 
 export const Modal = () => {
@@ -119,16 +120,28 @@ export const Modal = () => {
   return (
     <>
       <nav
-        className={`absolute ${
-          displayControl.blur ? "blur-sm" : " blur-0"
-        } transition-all ${
-          sideBar.display
-        } gap-5 flex-col items-center py-10 top-0 ${
-          sideBar.position
-        } w-screen h-screen overflow-y-scroll bg-white text-black dark:bg-zinc-900 p-3 dark:text-white z-10`}
+        className={`
+        absolute 
+        ${displayControl.blur ? "blur-sm" : " blur-0"} 
+        transition-all 
+        ${sideBar.display} 
+        gap-5 flex-col 
+        items-center 
+        py-3 
+        top-0 
+        ${sideBar.position} 
+        w-screen 
+        h-screen 
+        overflow-y-scroll 
+        bg-white 
+        text-black 
+        dark:bg-[#121013] 
+        px-3
+        dark:text-white 
+        z-10`
+      }
       >
-        {/* close button */}
-        <CloseButton toggleSideBarFunction={toggleSideBar} isModal={true} />
+        <HeaderOfModal closeModal={toggleSideBar} />
         {/* Input Rename */}
         <InputRename addRename={addRename} renameKey={addRemameWithKey} />
         {/* Textarea */}

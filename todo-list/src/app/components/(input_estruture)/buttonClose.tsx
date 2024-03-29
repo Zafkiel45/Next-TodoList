@@ -3,7 +3,11 @@ import CloseSvg from '../utility/svg_components/x';
 export const CloseButton = (
     { 
       toggleSideBarFunction,
-    }:{toggleSideBarFunction: () => void}) => {
+  
+    }:{
+      toggleSideBarFunction: () => void,
+
+    }) => {
 
       return (
           <div

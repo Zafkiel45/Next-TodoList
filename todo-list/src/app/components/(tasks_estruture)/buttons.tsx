@@ -4,13 +4,23 @@ import FilterSvg from "../utility/svg_components/filter";
 export const ButtonsOfTasks = () => {
   return (
     <>
-      <div className="w-full flex flex-col gap-2 items-center h-fit py-4">
+      <div className="
+        w-full 
+        flex 
+        flex-col 
+        gap-2 
+        items-center 
+        h-fit 
+        py-4
+        tablet:w-[60%]
+      ">
         <div
           className="
             dark:text-[#BA8AEB] 
             border
             dark:border-[#6C567D] 
             border-[#818181]
+            text-[#5B5757]
             dark:bg-[#161319]
             bg-[#F8F8F8]
             w-4/5
@@ -19,6 +29,7 @@ export const ButtonsOfTasks = () => {
             cursor-pointer
             flex
             justify-between"
+            aria-label="botão para pesquisar tarefas"
           >
           <div>pesquise por algo</div>
           <div>
@@ -32,6 +43,7 @@ export const ButtonsOfTasks = () => {
             dark:border-[#6C567D] 
             border-[#818181]
             dark:bg-[#161319]
+            text-[#5B5757]
             bg-[#F8F8F8]
             w-4/5
             p-2
@@ -39,7 +51,9 @@ export const ButtonsOfTasks = () => {
             cursor-pointer
             flex
             justify-between
-          ">
+          "
+          aria-label="botão para filtrar tarefas"
+          >
           <div>filter tarefas</div>
           <div>
             <FilterSvg />
