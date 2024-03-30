@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import PencilSvg from '../utility/svg_components/pencil';
+import PencilSvg from "../utility/svg_components/pencil";
 
 interface TypeOfProps {
   descrebe: string;
@@ -62,7 +62,7 @@ export const TextArea = ({
         border 
         `}
       >
-        <PencilSvg/>
+        <PencilSvg />
       </button>
     </div>
   );

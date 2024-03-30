@@ -124,7 +124,7 @@ export const InputTask = () => {
         gap-4`}
       >
         {/* close button */}
-        <HeaderInput isModal={false} title="Lista de tarefas" />
+        <HeaderInput title="Lista de tarefas" />
         {/* task input */}
         <InputNameTask keyEvent={keyPressEvent} />
         {/* add button */}

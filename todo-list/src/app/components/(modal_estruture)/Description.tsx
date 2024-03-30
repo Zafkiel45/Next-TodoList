@@ -1,13 +1,12 @@
-
 interface TypeOfProps {
   task: any[];
   indexed: number;
 }
 
 export const Description = ({ task, indexed }: TypeOfProps) => {
-
   return (
-    <div className="
+    <div
+      className="
     placeholder:text-[#5B5757] 
     dark:border-[#6C567D]
     dark:bg-[#161319]
@@ -23,7 +22,8 @@ export const Description = ({ task, indexed }: TypeOfProps) => {
     shadow-md 
     flex 
     items-center 
-    ">
+    "
+    >
       {indexed !== null &&
       task !== undefined &&
       task[indexed] &&

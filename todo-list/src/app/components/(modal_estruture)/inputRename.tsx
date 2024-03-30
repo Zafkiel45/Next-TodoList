@@ -1,8 +1,7 @@
 "use client";
 import { todoContext } from "../context";
 import { useContext } from "react";
-import RenameSVG from '../utility/svg_components/rename';
-
+import RenameSVG from "../utility/svg_components/rename";
 
 interface TypeOfProps {
   renameKey: (e: { key: string }) => void;
@@ -13,7 +12,8 @@ export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
   const { rename, setRename } = useContext(todoContext);
 
   return (
-    <div className="
+    <div
+      className="
       w-full 
       desktopMini:w-4/5 
       h-auto 
@@ -64,9 +64,9 @@ export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
         dark:placeholder:text-[#BA8AEB]
         border-[#818181]
         bg-[#F8F8F8]
-        `
-      }>
-        <RenameSVG/>
+        `}
+      >
+        <RenameSVG />
       </button>
     </div>
   );

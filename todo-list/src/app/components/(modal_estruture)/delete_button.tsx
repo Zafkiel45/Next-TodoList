@@ -1,17 +1,7 @@
 import { SetStateAction } from "react";
 import DangerSvg from "../utility/svg_components/danger";
 
-interface TypeOfProps {
-  setDisplayControl: (
-    value: SetStateAction<{ visible: string; blur: boolean }>
-  ) => void;
-  displayControl: { visible: string; blur: boolean };
-}
-
-export const DeleteButton = ({
-  setDisplayControl,
-  displayControl,
-}: TypeOfProps) => {
+export const DeleteButton = ({ removeTask }: { removeTask: () => void }) => {
   return (
     <div
       className="
@@ -44,13 +34,7 @@ export const DeleteButton = ({
         somente esta tarefa. Todas as outras permanecerão.
       </div>
       <button
-        onClick={() =>
-          setDisplayControl({
-            ...displayControl,
-            visible: "flex",
-            blur: true,
-          })
-        }
+        onClick={removeTask}
         className="
         font-bold 
         dark:bg-[#C23E3E] 

@@ -1,11 +1,9 @@
 import { useContext, useState } from "react";
 import { todoContext } from "./context";
-import { CloseButton } from "./(input_estruture)/closeButton";
 import { InputRename } from "./(modal_estruture)/inputRename";
 import { TextArea } from "./(modal_estruture)/textArea";
 import { Description } from "./(modal_estruture)/Description";
 import { DeleteButton } from "./(modal_estruture)/delete_button";
-import { ModalWarn } from "./(modal_estruture)/Modal_warn";
 import { HeaderOfModal } from "./(modal_estruture)/header";
 import { UpdateDB } from "./utility/updateDB";
 
@@ -156,17 +154,8 @@ export const Modal = () => {
         {/* Priority */}
         
         {/* Delet button */}
-        <DeleteButton
-          displayControl={displayControl}
-          setDisplayControl={setDisplayControl}
-        />
+        <DeleteButton removeTask={RemoveTask}/>
       </nav>
-      {/* Modal warn */}
-      <ModalWarn
-        displayControl={displayControl}
-        setDisplayControl={setDisplayControl}
-        removeTask={RemoveTask}
-      />
     </>
   );
 };
