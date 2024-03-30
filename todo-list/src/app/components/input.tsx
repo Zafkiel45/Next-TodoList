@@ -53,8 +53,9 @@ export const InputTask = () => {
 
       objectStorage.add({
         title: name,
-        priority: "height",
         description: descrebe,
+        type: '',
+        color: '',
       });
 
       UpdateDB(setTask, setName);

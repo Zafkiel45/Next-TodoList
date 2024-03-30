@@ -25,7 +25,8 @@ export const useIndexedDB = (storeName: string, dbName: string) => {
       });
 
       objectStore.createIndex("title", "title", { unique: true });
-      objectStore.createIndex("priority", "priority", { unique: false });
+      objectStore.createIndex("type", "type", {unique: false}); 
+      objectStore.createIndex("color", "color", {unique: false});
     };
 
     request.onsuccess = () => {

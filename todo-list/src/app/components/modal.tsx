@@ -6,6 +6,7 @@ import { Description } from "./(modal_estruture)/Description";
 import { DeleteButton } from "./(modal_estruture)/delete_button";
 import { HeaderOfModal } from "./(modal_estruture)/header";
 import { UpdateDB } from "./utility/updateDB";
+import { ContainerOfFlags } from "./(modal_estruture)/flagContainer";
 
 export const Modal = () => {
   const {
@@ -151,8 +152,8 @@ export const Modal = () => {
         />
         {/* Description */}
         <Description indexed={indexed} task={task} />
-        {/* Priority */}
-        
+        {/* flags */}
+        <ContainerOfFlags/>        
         {/* Delet button */}
         <DeleteButton removeTask={RemoveTask}/>
       </nav>
