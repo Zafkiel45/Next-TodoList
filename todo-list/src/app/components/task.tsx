@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react"
+import { useContext, useMemo } from "react"
 import { todoContext } from "./context"
 
 export const Tasks = () => {
@@ -43,7 +43,7 @@ export const Tasks = () => {
                             "
                         key={Math.random()}> 
                         <div>{item.title}</div>
-                        <div className={`${task[index].prioridade} animate-pulse top-[-2px] right-[-2px] rounded-full w-3 h-3 absolute`}>
+                        <div className={`${task[index].color} animate-pulse -top-1 -right-1 rounded-full w-3 h-3 absolute`}>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="dark:fill-[#B371D1] fill-[#3F3F3F] bi bi-three-dots" viewBox="0 0 16 16">
