@@ -137,7 +137,7 @@ export const Modal = () => {
         dark:bg-[#121013] 
         px-3
         dark:text-white 
-        z-10`
+        z-30`
       }
       >
         <HeaderOfModal closeModal={toggleSideBar} />

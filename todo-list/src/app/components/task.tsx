@@ -1,9 +1,17 @@
 import { useContext, useMemo } from "react"
 import { todoContext } from "./context"
+import { SearchTask } from "./(tasks_estruture)/search";
+import { FilterTasks } from "./(tasks_estruture)/filter";
 
 export const Tasks = () => {
 
-    const { task, sideBar, setSideBar, setTitle, setIndexed} = useContext(todoContext);
+    const { 
+        task,
+        sideBar, 
+        setSideBar, 
+        setTitle, 
+        setIndexed,
+        } = useContext(todoContext);
 
 
     const tasksOptimized = useMemo(() => {
@@ -12,7 +20,9 @@ export const Tasks = () => {
             return task.map((item, index) => {
                 return (
                     <li  
-                        onClick={() => {InterativeElements(item.id, index)}} 
+                        onClick={() => {
+                            InterativeElements(item.id, index)
+                        }} 
                         className="
                             relative 
                             tablet:hover:scale-105 
@@ -58,6 +68,7 @@ export const Tasks = () => {
             console.log("ocorreu um erro " + name + " " + mensage)
         }
     }, [task]);
+    
 
     const InterativeElements = (e:number, m: number):void => {
         setSideBar({
@@ -69,11 +80,12 @@ export const Tasks = () => {
         setIndexed(m)
     }
 
-
     return (
         <>    
             <ol className="flex flex-col gap-3 items-center py-4 list-none w-4/5 h-full">
                 {tasksOptimized}
+                <SearchTask/>
+                <FilterTasks/>
             </ol>    
         </>
     )

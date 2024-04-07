@@ -1,7 +1,13 @@
+'use client'
 import SearchSvg from "../utility/svg_components/search";
 import FilterSvg from "../utility/svg_components/filter";
+import { useContext } from "react";
+import { TasksContext } from "../utility/tasksContext";
 
 export const ButtonsOfTasks = () => {
+
+  const { setActiveSearch, setActiveFilter } = useContext(TasksContext)
+
   return (
     <>
       <div className="
@@ -15,6 +21,7 @@ export const ButtonsOfTasks = () => {
         tablet:w-[60%]
       ">
         <div
+          onClick={() => setActiveSearch(true)}
           className="
             dark:text-[#BA8AEB] 
             border
@@ -37,6 +44,7 @@ export const ButtonsOfTasks = () => {
           </div>
         </div>
         <div
+          onClick={() => setActiveFilter(true)}
           className="
           dark:text-[#BA8AEB] 
             border

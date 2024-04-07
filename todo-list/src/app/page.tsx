@@ -1,5 +1,6 @@
 'use client'
 import { todoContext } from "./components/context"
+import { TasksContext } from "./components/utility/tasksContext";
 import { useState } from "react";
 import { Modal } from "./components/modal";
 import { AllElements } from "./components/utility/fatherMode";
@@ -16,13 +17,17 @@ export default function Home() {
   const [title, setTitle] = useState(null);
   const [blur, setBlur] = useState(false);
   const [rename, setRename] = useState('');
+  const [currentTag, setCurrentTag] = useState('');
   const [descrebe, setDescrebe] = useState('');
   const [indexed, setIndexed] = useState(null);
+  const [toggleSideBar, setToggleSideBar] = useState<string>('left-0');
+  const [activeSearch, setActiveSearch] = useState<boolean>(false);
+  const [activeFilter, setActiveFilter] = useState<boolean>(false);
+  const [ElementDescription, setElementDescription] = useState('')
   const [sideBar, setSideBar] = useState({
     position:'right-[-200%]',
     display: 'hidden',
   });
-  const [toggleSideBar, setToggleSideBar] = useState<string>('left-0');
   const toggleSideBarFunction = ():void => {
     setToggleSideBar('left-[-100%]')
   }
@@ -52,13 +57,24 @@ export default function Home() {
         indexed,
         setIndexed,
         rename, 
-        setRename
+        setRename,
+        setElementDescription,
+        ElementDescription,
       }}>
         <div className="flex">
           <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />
           <MainContainerInputs toggleSideBar={toggleSideBar} />
           <Modal/>
-          <MainContainerTasks blur={blur} />
+          <TasksContext.Provider value={{
+            activeFilter,
+            activeSearch, 
+            currentTag,
+            setActiveFilter, 
+            setActiveSearch,
+            setCurrentTag
+          }}>
+            <MainContainerTasks blur={blur} />
+          </TasksContext.Provider>
         </div>
       </todoContext.Provider>
     </AllElements>

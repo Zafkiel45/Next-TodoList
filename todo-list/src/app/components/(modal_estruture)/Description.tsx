@@ -1,9 +1,14 @@
+'use client'
+import { useContext } from "react";
+import { todoContext } from "../context";
+
 interface TypeOfProps {
   task: any[];
   indexed: number;
 }
 
 export const Description = ({ task, indexed }: TypeOfProps) => {
+
   return (
     <div
       className="

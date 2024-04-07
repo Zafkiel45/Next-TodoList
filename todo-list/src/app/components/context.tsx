@@ -14,6 +14,7 @@ interface myContextType {
     title: number | null;
     indexed: number | null;
     rename: string;
+    ElementDescription: string;
 }
 interface setTypeDispatch {
     setTask: React.Dispatch<React.SetStateAction<any[]>>;
@@ -24,6 +25,7 @@ interface setTypeDispatch {
     setDescrebe: React.Dispatch<React.SetStateAction<string>>;
     setTitle: React.Dispatch<React.SetStateAction<number | null>>;
     setIndexed: React.Dispatch<React.SetStateAction<number | null>>
+    setElementDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 interface methodsType extends myContextType, setTypeDispatch{
     toggleSideBarFunction: () => void;
