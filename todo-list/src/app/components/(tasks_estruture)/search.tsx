@@ -75,7 +75,7 @@ export const SearchTask = () => {
             dark:bg-[#161319]
             bg-[#F8F8F8]
             flex-col
-            gap-6
+            gap-4
             z-10
             px-2
             dark:text-white
@@ -88,7 +88,7 @@ export const SearchTask = () => {
                         Busque por tarefas
                     </h1>
                 </div>
-                <div onClick={HandleCloseSearchModal}>
+                <div className='cursor-pointer' onClick={HandleCloseSearchModal}>
                     <CloseSvg height='h-[24px] w-[24px]'/>
                 </div>
             </div>
@@ -105,8 +105,10 @@ export const SearchTask = () => {
                           dark:bg-[#161319]
                             border 
                             dark:border-[#6C567D]
+                            border-[#818181]
                             rounded-md
                             dark:placeholder:text-[#BA8AEB]
+                            placeholder-text-[#5B5757]
                             placeholder:text-sm
                             px-3
                             py-1
@@ -118,10 +120,11 @@ export const SearchTask = () => {
                     dark:bg-[#161319]
                     border 
                     dark:border-[#6C567D]
+                    border-[#818181]
                     rounded-md
                     px-2
                 '>
-                    <button className='flex w-full h-full justify-center items-center'>
+                    <button className=' flex w-full h-full justify-center items-center'>
                         <SearchSvg/>
                     </button>
                 </div>

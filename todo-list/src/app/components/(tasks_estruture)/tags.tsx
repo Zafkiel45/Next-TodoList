@@ -17,6 +17,7 @@ export const TagsOfFilter = ({
             h-fit 
             py-1 
             px-3
+            text-white
             relative
             rounded-md
             cursor-point
