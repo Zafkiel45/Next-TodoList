@@ -20,8 +20,17 @@ export const TagsOfFilter = ({
             text-white
             relative
             rounded-md
-            cursor-point
+            cursor-pointer
             flex-grow
+            mobileMini:px-5 
+            mobileMini:py-2
+            tablet:px-6
+            tablet:py-3
+            desktopMini:px-8
+            desktopMIni:text-lg
+            desktop:px-7
+            desktop:py-2
+            
         `}
         aria-label={`marque sua tarefa como ${typeOfFlag}`}
         >
