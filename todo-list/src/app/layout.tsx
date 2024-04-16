@@ -14,8 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }:Readonly<{children: React.ReactNode;}>) {
   return (
-    <html lang="pt-br" className='h-screen w-screen flex justify-center items-center '>
-      <body className={`${inter.className}   h-screen w-screen flex justify-center items-center `}>
+    <html lang="pt-br" className='h-fit w-screen flex justify-center items-center '>
+      <body className={`${inter.className}   h-fit w-screen flex justify-center items-center `}>
         {children}
         <Analytics/>
       </body>

@@ -115,11 +115,12 @@ export const InputTask = () => {
         w-full 
         transition-all 
         ${blur ? "blur-sm" : null} 
-        h-fit items-center 
+        h-fit
+        mobileMini:pb-2
+        items-center 
         desktop:w-4/5 
         desktop:gap-2 
-        mobileMini:gap-3
-        mobileMini:w-[90%] 
+        mobileMini:gap-3 
         tablet:gap-5 
         flex-col 
         gap-4`}

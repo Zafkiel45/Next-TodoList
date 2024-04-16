@@ -12,14 +12,14 @@ export const MainContainerTasks = ({blur}:{blur:boolean}) => {
             w-[90vw] 
             ${blur ? 'blur-sm':null} 
             overflow-hidden 
-            h-screen 
+            h-screen
             py-2 
             bg-white 
             dark:bg-[#121013]`
         }>
             <ButtonsOfTasks/>
             <div className="
-                h-full 
+                h-screen
                 overflow-y-scroll 
                 overflow-x-hidden 
                 desktopBig:w-[70%] 

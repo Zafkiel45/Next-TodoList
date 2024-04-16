@@ -19,6 +19,7 @@ export const ButtonsOfTasks = () => {
         h-fit 
         py-4
         tablet:w-[60%]
+        desktopBig:w-[70%]
       ">
         <div
           onClick={() => setActiveSearch(true)}
@@ -34,6 +35,8 @@ export const ButtonsOfTasks = () => {
             p-2
             rounded-md
             cursor-pointer
+            desktop:w-[72%]
+            
             flex
             justify-between"
             aria-label="botão para pesquisar tarefas"
@@ -55,6 +58,7 @@ export const ButtonsOfTasks = () => {
             bg-[#F8F8F8]
             w-4/5
             p-2
+            desktop:w-[72%]
             rounded-md
             cursor-pointer
             flex
