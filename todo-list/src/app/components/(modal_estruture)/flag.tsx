@@ -56,6 +56,7 @@ export const FlagComponent = ({
             rounded-md
             cursor-point
             flex-grow
+            desktopMini:text-lg
         `}
         aria-label={`marque sua tarefa como ${typeOfFlag}`}
         >

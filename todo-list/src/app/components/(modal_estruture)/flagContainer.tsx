@@ -10,6 +10,7 @@ export const ContainerOfFlags = () => {
             px-3 
             rounded-md
             flex  
+            desktopMini:w-4/5
             flex-col
             items-center  
             dark:bg-[#161319]

@@ -118,45 +118,47 @@ export const Modal = () => {
   };
   return (
     <>
-      <nav
-        className={`
-        absolute 
-        ${displayControl.blur ? "blur-sm" : " blur-0"} 
-        transition-all 
-        ${sideBar.display} 
-        gap-5 flex-col 
-        items-center 
-        py-3 
-        top-0 
-        ${sideBar.position} 
-        w-screen 
-        h-screen 
-        overflow-y-scroll 
-        bg-white 
-        text-black 
-        dark:bg-[#121013] 
-        px-3
-        dark:text-white 
-        z-30`
-      }
-      >
-        <HeaderOfModal closeModal={toggleSideBar} />
-        {/* Input Rename */}
-        <InputRename addRename={addRename} renameKey={addRemameWithKey} />
-        {/* Textarea */}
-        <TextArea
-          addDescrebe={addDescrebe}
-          addDescrebeWithKey={addDescribeWithKey}
-          descrebe={descrebe}
-          setDescrebe={setDescrebe}
-        />
-        {/* Description */}
-        <Description indexed={indexed} task={task} />
-        {/* flags */}
-        <ContainerOfFlags/>        
-        {/* Delet button */}
-        <DeleteButton removeTask={RemoveTask}/>
-      </nav>
+      <div className={`fixed top-0 flex left-0 w-screen h-screen ${displayControl.blur ? "blur-sm" : " blur-0"} transition-all ${sideBar.display} z-30`}>
+        <nav
+          className={`
+          absolute
+          gap-5 
+          flex
+          flex-col 
+          items-center 
+          py-3 
+          top-0 
+          ${sideBar.position} 
+          w-full 
+          h-full 
+          
+          overflow-y-scroll 
+          bg-white 
+          text-black 
+          dark:bg-[#121013] 
+          px-3
+          dark:text-white 
+          `
+        }
+        >
+          <HeaderOfModal closeModal={toggleSideBar} />
+          {/* Input Rename */}
+          <InputRename addRename={addRename} renameKey={addRemameWithKey} />
+          {/* Textarea */}
+          <TextArea
+            addDescrebe={addDescrebe}
+            addDescrebeWithKey={addDescribeWithKey}
+            descrebe={descrebe}
+            setDescrebe={setDescrebe}
+          />
+          {/* Description */}
+          <Description indexed={indexed} task={task} />
+          {/* flags */}
+          <ContainerOfFlags/>        
+          {/* Delet button */}
+          <DeleteButton removeTask={RemoveTask}/>
+        </nav>
+      </div>
     </>
   );
 };
