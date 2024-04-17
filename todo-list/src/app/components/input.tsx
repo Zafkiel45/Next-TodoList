@@ -115,7 +115,7 @@ export const InputTask = () => {
         w-full 
         transition-all 
         ${blur ? "blur-sm" : null} 
-        h-fit
+        h-full
         mobileMini:pb-2
         items-center 
         desktop:w-4/5 

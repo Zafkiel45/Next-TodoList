@@ -20,7 +20,7 @@ export const Modal = ({
   return (
     <div
       className={`
-        absolute 
+        fixed
         top-0 
         ${objectComplete.visible} 
       text-black 
@@ -29,22 +29,24 @@ export const Modal = ({
         flex-col 
         p-4 
         bg-white 
+        tablet:border
+        tablet:border-red-500
         dark:bg-[#1F1414]
         z-10  
         tablet:h-fit 
         tablet:py-7 
-        tablet:top-[2%]  
+        tablet:top-[10%]  
         tablet:rounded-lg 
         tablet:overflow-hidden  
-        tablet:left-[30%] 
+        tablet:left-[10%] 
         tablet:w-[80vw] 
-        desktopMini:top-[4%] 
-        desktopMini:left-[55%] 
+        desktopMini:top-[15%] 
+        desktopMini:left-[20%] 
         desktopMini:w-[60vw] 
-        desktopBig:left-[97%] 
+        desktopBig:left-[25%] 
         desktopBig:w-[45vw] 
-        w-full 
-        h-full
+        w-screen 
+        h-screen
         shadow-md`
       }
     >
@@ -76,10 +78,6 @@ export const Modal = ({
         queira apagar tudo, clique no botão abaixo.</span> 
         <br />
         <br />
-        Quais são as consequências disso? Se você apagar todas as suas tarefas, elas nunca mais
-        poderão ser recuperadas novamente. Porém, nada impede de você cria-las novamente. 
-        Se você possui alguma tarefa que não deseja apagar, recomendamos que apague apenas 
-        as tarefas que você não quer mais de forma individual.
       </div>
       {/* Delete all button */}
       <button

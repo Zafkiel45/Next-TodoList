@@ -50,8 +50,8 @@ export const FilterTasks = () => {
     }
 
     return (
-        <div className={`${activeFilter ? 'flex':'hidden'} top-0 left-0 w-screen h-screen fixed bg-[#F8F8F8] dark:bg-[#121013] z-10`}>
-            <div className={`absolute w-full dark:text-white h-full flex items-center flex-col desktopMini:gap-8 gap-5`}>
+        <div className={`${activeFilter ? 'flex':'hidden'} pb-3 top-0 left-0 w-screen h-screen fixed bg-[#F8F8F8] dark:bg-[#121013] z-10`}>
+            <div className={`absolute w-full dark:text-white overflow-auto h-full flex items-center flex-col desktopMini:gap-8 gap-5`}>
                 <header className='w-full py-2 h-auto'>
                     <nav className='flex justify-between px-3 items-center'>
                         <div>
@@ -120,6 +120,21 @@ export const FilterTasks = () => {
                         <button onClick={HandleFilter} className='dark:bg-[#121013] bg-[#818181] text-white  border-[#5B5757] border dark:border-[#6C567D] w-fit h-fit px-10 py-2 rounded-md shadow-sm cursor-pointer'>
                             Filtrar!
                         </button>
+                    </div>
+                    <div className='hidden flex-col gap-3 py-3 border border-[#818181] dark:border-[#6C567D] dark:bg-[#161319] w-full px-4 rounded-md'>
+                        <h1 className='text-lg font-bold'>
+                            Como funciona:
+                        </h1>
+                        <div>
+                            Quando você clicar, por exemplo em "casa", irá somente aparecer
+                            somente as tarefas cujo você marcou como "casa". As vezes, 
+                            pode não aparecer nenhuma tarefa caso você não marcou nenhuma. 
+                            <br />
+                            Por exemplo: Você escolhe "viagem" sem ter marcado nenhuma tarefa
+                            como "viagem", então não irá aparecer nenhum. Não se preocupe! Suas tarefas 
+                            não foram apagadas. Quando você clicar em "tudo", todas as tarefas serão 
+                            mostradas sem filtro algum.
+                        </div>
                     </div>
                 </main>
             </div>

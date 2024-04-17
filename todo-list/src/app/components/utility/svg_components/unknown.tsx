@@ -4,7 +4,7 @@ function Unknown() {
         viewBox="0 0 57 57"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`fill-[#3F3F3F] dark:fill-[#B371D1] h-[24px] w-[24px]`}
+        className={`fill-[#3F3F3F] dark:fill-[#B371D1] cursor-pointer h-[24px] w-[24px]`}
       >
         <path
           fillRule="evenodd"
