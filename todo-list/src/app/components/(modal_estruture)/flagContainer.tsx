@@ -1,7 +1,13 @@
+'use client'
 import UnknownSvg from '../utility/svg_components/unknown';
 import { FlagComponent } from './flag';
+import { useContext } from 'react';
+import { TasksContext } from '../utility/tasksContext';
 
 export const ContainerOfFlags = () => {
+
+    const { setVisibility } = useContext(TasksContext);
+
     return (
         <div className="
             w-full 
@@ -28,7 +34,7 @@ export const ContainerOfFlags = () => {
                 <div>
                     Tipos de tarefas:
                 </div>
-                <div>
+                <div onClick={() => setVisibility(() => true)}>
                     <UnknownSvg/>
                 </div>
             </div>

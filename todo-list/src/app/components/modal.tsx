@@ -7,6 +7,7 @@ import { DeleteButton } from "./(modal_estruture)/delete_button";
 import { HeaderOfModal } from "./(modal_estruture)/header";
 import { UpdateDB } from "./utility/updateDB";
 import { ContainerOfFlags } from "./(modal_estruture)/flagContainer";
+import { TutorialModal } from "./utility/tutorialModal";
 
 export const Modal = () => {
   const {
@@ -21,7 +22,13 @@ export const Modal = () => {
     task,
     indexed
   } = useContext(todoContext);
-
+  const content = `
+    Ao clicar em alguma das opções, como "academia", você vai marca que esta tarefa
+    é voltada para academia, assim, ajudando no reconhecendo no tipo de tarefa. Ao
+    escolher uma das opções, a bolinha irá aparecer no canto superior direito da tarefa
+    com sua respectiva cor, que ajuda na identificação do tipo da tarefa. Também é 
+    possível alterar seu tipo quando quiser!
+  `
   const [displayControl, setDisplayControl] = useState({
     visible: "hidden",
     blur: false,
@@ -130,8 +137,7 @@ export const Modal = () => {
           top-0 
           ${sideBar.position} 
           w-full 
-          h-full 
-          
+          h-full  
           overflow-y-scroll 
           bg-white 
           text-black 
@@ -157,6 +163,8 @@ export const Modal = () => {
           <ContainerOfFlags/>        
           {/* Delet button */}
           <DeleteButton removeTask={RemoveTask}/>
+          {/* ModalTutorial */}
+          <TutorialModal content={content} />
         </nav>
       </div>
     </>

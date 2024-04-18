@@ -23,6 +23,7 @@ export default function Home() {
   const [toggleSideBar, setToggleSideBar] = useState<string>('left-0');
   const [activeSearch, setActiveSearch] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<boolean>(false);
+  const [visibility, setVisibility] = useState<boolean>(false);
   const [ElementDescription, setElementDescription] = useState('')
   const [sideBar, setSideBar] = useState({
     position:'right-[-200%]',
@@ -64,15 +65,17 @@ export default function Home() {
         <div className={`flex h-full`}>
           <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />
           <MainContainerInputs toggleSideBar={toggleSideBar} />
-          <Modal/>
           <TasksContext.Provider value={{
             activeFilter,
             activeSearch, 
             currentTag,
+            visibility,
             setActiveFilter, 
             setActiveSearch,
-            setCurrentTag
+            setCurrentTag,
+            setVisibility
           }}>
+            <Modal/>
             <MainContainerTasks blur={blur} />
           </TasksContext.Provider>
         </div>

@@ -4,9 +4,11 @@ import { createContext } from "react"
 interface TasksContextTypes {
     activeSearch: boolean;
     activeFilter: boolean;
+    visibility: boolean;
     currentTag: string;
     setActiveSearch: React.Dispatch<React.SetStateAction<boolean>>;
     setActiveFilter: React.Dispatch<React.SetStateAction<boolean>>;
+    setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
     setCurrentTag: React.Dispatch<React.SetStateAction<string>>;
 }
 
