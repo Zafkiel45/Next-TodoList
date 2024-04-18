@@ -44,8 +44,8 @@ export const InputTask = () => {
         window.alert("mesmo nome!");
       };
 
-      if (name === "" || name.trim() === "" || name.length === 25) {
-        window.alert("nome vazio!");
+      if (name === "" || name.trim() === "" || name.length >= 20) {
+        window.alert("Erro!");
         setName("");
         database.abort();
         return;
@@ -116,7 +116,8 @@ export const InputTask = () => {
         transition-all 
         ${blur ? "blur-sm" : null} 
         h-full
-        mobileMini:pb-2
+        overflow-auto
+        mobileMini:pb-8
         items-center 
         desktop:w-4/5 
         desktop:gap-2 

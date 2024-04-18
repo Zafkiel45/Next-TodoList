@@ -21,6 +21,7 @@ export const ContainerOfFlags = () => {
             items-center  
             dark:bg-[#161319]
             dark:border-[#6C567D]
+            border-[#818181]
             border
             gap-3
         ">

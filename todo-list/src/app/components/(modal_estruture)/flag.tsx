@@ -50,6 +50,7 @@ export const FlagComponent = ({
             ${BackgroundColor} 
             w-fit
             h-fit 
+            text-white
             py-1 
             px-3
             relative

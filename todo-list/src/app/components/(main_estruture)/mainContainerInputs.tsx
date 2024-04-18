@@ -14,11 +14,10 @@ export const MainContainerInputs = ({toggleSideBar}:{toggleSideBar:string}) => {
             tablet:left-0 
             transition-all 
             ${toggleSideBar} 
-            h-full
-            tablet:h-fit
+            h-screen
             bg-white 
             dark:bg-[#121013] 
-            desktopBig:w-[30vw]  
+            desktopBig:w-[35vw]  
             tablet:w-[40vw] 
             w-screen 
             z-10 
