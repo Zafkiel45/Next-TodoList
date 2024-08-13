@@ -55,7 +55,7 @@ export const FlagComponent = ({
             px-3
             relative
             rounded-md
-            cursor-point
+            cursor-pointer
             flex-grow
             desktopMini:text-lg
         `}

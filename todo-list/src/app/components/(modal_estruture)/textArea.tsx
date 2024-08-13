@@ -52,6 +52,7 @@ export const TextArea = ({
         h-fit 
         px-4 
         py-1 
+        cursor-pointer
         rounded-lg 
         placeholder:text-[#5B5757] 
         dark:border-[#6C567D]

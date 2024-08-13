@@ -64,6 +64,7 @@ export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
         dark:placeholder:text-[#BA8AEB]
         border-[#818181]
         bg-[#F8F8F8]
+        cursor-pointer
         `}
       >
         <RenameSVG />
