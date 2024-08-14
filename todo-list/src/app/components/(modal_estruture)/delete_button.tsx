@@ -1,4 +1,3 @@
-import { SetStateAction } from "react";
 import DangerSvg from "../utility/svg_components/danger";
 
 export const DeleteButton = ({ removeTask }: { removeTask: () => void }) => {

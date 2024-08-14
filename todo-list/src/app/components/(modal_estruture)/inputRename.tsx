@@ -2,6 +2,9 @@
 import { todoContext } from "../context";
 import { useContext } from "react";
 import RenameSVG from "../utility/svg_components/rename";
+// hooks
+import { useAtom } from "jotai";
+import { renameStateAtom } from "@/app/(atoms)/(modal)/modal-atoms";
 
 interface TypeOfProps {
   renameKey: (e: { key: string }) => void;
@@ -10,6 +13,8 @@ interface TypeOfProps {
 
 export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
   const { rename, setRename } = useContext(todoContext);
+
+  const [renameState, setRenameState] = useAtom(renameStateAtom);
 
   return (
     <div
@@ -22,11 +27,11 @@ export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
     >
       <input
         type="text"
-        value={rename}
+        value={renameState}
         onKeyDown={renameKey}
         aria-label="input para entrada do novo nome para uma tarefa"
         onChange={(e) => {
-          setRename(e.target.value);
+          setRenameState(() => e.target.value);
         }}
         placeholder="Renomear tarefa..."
         className="
@@ -46,7 +51,7 @@ export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
           rounded-md"
       />
       <button
-        disabled={rename === "" ? true : false}
+        disabled={renameState === "" ? true : false}
         onClick={addRename}
         aria-label="botão para renomar uma tarefa"
         className={`

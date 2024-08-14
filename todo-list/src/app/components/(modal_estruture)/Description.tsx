@@ -1,13 +1,16 @@
 'use client'
-import { useContext } from "react";
-import { todoContext } from "../context";
+// hooks
+import { useAtomValue } from "jotai";
+// atoms
+import { tasksIndexStateAtom } from "@/app/(atoms)/(tasks)/tasks-atoms";
 
 interface TypeOfProps {
   task: any[];
-  indexed: number;
 }
 
-export const Description = ({ task, indexed }: TypeOfProps) => {
+export const Description = ({ task }: TypeOfProps) => {
+
+  const getTasksIndexState = useAtomValue(tasksIndexStateAtom);
 
   return (
     <div
@@ -29,11 +32,11 @@ export const Description = ({ task, indexed }: TypeOfProps) => {
     items-center 
     "
     >
-      {indexed !== null &&
+      {getTasksIndexState !== null &&
       task !== undefined &&
-      task[indexed] &&
-      task[indexed].description !== "" ? (
-        <>{task[indexed].description}</>
+      task[getTasksIndexState] &&
+      task[getTasksIndexState].description !== "" ? (
+        <>{task[getTasksIndexState].description}</>
       ) : (
         <>
           <p className="italic">Sem descrição</p>

@@ -1,18 +1,27 @@
+'use client';
 import { useContext, useMemo } from "react"
 import { todoContext } from "./context"
 import { SearchTask } from "./(tasks_estruture)/search";
 import { FilterTasks } from "./(tasks_estruture)/filter";
 
+// hooks
+import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
+// atoms
+import { visibleStateAtom } from "../(atoms)/(modal)/modal-atoms";
+import { indexedItemIndexAtom } from "../(atoms)/(modal)/modal-atoms";
+import { tasksIndexStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
+import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
+
 export const Tasks = () => {
-
-    const { 
-        task,
-        sideBar, 
-        setSideBar, 
-        setTitle, 
-        setIndexed,
-        } = useContext(todoContext);
-
+    // only update functions
+    const setIndexedItemState = useSetAtom(indexedItemIndexAtom);
+    const setTasksIndexState = useSetAtom(tasksIndexStateAtom);
+    // read and update
+    const [visibleState, setVisibleState] = useAtom(visibleStateAtom); 
+    // only read 
+    const task = useAtomValue(tasksStateAtom);
 
     const tasksOptimized = useMemo(() => {
         try {
@@ -71,13 +80,13 @@ export const Tasks = () => {
     
 
     const InterativeElements = (e:number, m: number):void => {
-        setSideBar({
-            ...sideBar,
+        setVisibleState({
+            ...visibleState,
             position: 'right-0',
             display: 'flex'
         });
-        setTitle(e);
-        setIndexed(m)
+        setIndexedItemState(e);
+        setTasksIndexState(m)
     }
 
     return (

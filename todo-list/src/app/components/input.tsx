@@ -1,3 +1,4 @@
+'use client';
 import { useContext, useState, KeyboardEvent } from "react";
 import { todoContext } from "./context";
 import { SwitchModeButton } from "./(input_estruture)/switch_button";
@@ -10,12 +11,19 @@ import { useIndexedDB } from "./(database)/useOpenDB";
 import { UpdateDB } from "./utility/updateDB";
 import { HeaderInput } from "./(input_estruture)/header";
 
+import { useSetAtom } from "jotai";
+import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
+
 export interface controler {
   visible: string;
   blur?: boolean;
 }
 
 export const InputTask = () => {
+
+  // only update:
+  const setTasksState = useSetAtom(tasksStateAtom);
+
   const [displayControl, setDisplayControl] = useState<controler>({
     visible: "hidden",
   });
@@ -58,7 +66,7 @@ export const InputTask = () => {
         color: '',
       });
 
-      UpdateDB(setTask, setName);
+      UpdateDB(setTasksState, setName);
       toggleSideBarFunction();
     };
 
@@ -95,7 +103,7 @@ export const InputTask = () => {
         console.log("database is'n deleted");
       };
 
-      setTask(() => []);
+      setTasksState(() => []);
       setBlur(() => false);
       setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
     };

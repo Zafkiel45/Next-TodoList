@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
-import { todoContext } from "../context";
+import { useEffect } from "react";
+// atoms 
+import { useSetAtom } from "jotai";
+import { tasksStateAtom } from "@/app/(atoms)/(tasks)/tasks-atoms";
 
 export const useIndexedDB = (storeName: string, dbName: string) => {
 
-  const { setTask } = useContext(todoContext);
+  const setTasksState = useSetAtom(tasksStateAtom);
 
   useEffect(() => {
     const request = indexedDB.open(dbName, 1);
@@ -44,7 +46,7 @@ export const useIndexedDB = (storeName: string, dbName: string) => {
           cursor.continue();
         } else {
           console.log("don't more entries!");
-          setTask(currentObjects);
+          setTasksState(currentObjects);
         }
       };
     };

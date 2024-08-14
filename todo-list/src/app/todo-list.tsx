@@ -3,7 +3,7 @@
 import { todoContext } from "./components/context";
 import { TasksContext } from "./components/utility/tasksContext";
 import { useState } from "react";
-import { Modal } from "./components/modal";
+import { Modal } from "./(components)/modal";
 import { AllElements } from "./components/utility/fatherMode";
 import { CloseTasksButton } from "./components/(main_estruture)/closeTasksButton";
 import { MainContainerInputs } from "./components/(main_estruture)/mainContainerInputs";
@@ -73,8 +73,8 @@ export const TodoListMainComponent = () => {
                 setCurrentTag,
                 setVisibility
               }}>
-                <Modal/>
-                <MainContainerTasks blur={blur} />
+                    <Modal/>
+                    <MainContainerTasks blur={blur} />
               </TasksContext.Provider>
             </div>
           </todoContext.Provider>

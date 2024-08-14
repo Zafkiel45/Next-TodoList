@@ -1,7 +1,11 @@
 'use client'
-import { useContext } from "react";
-import { todoContext } from "../context";
 import { UpdateDB } from "../utility/updateDB";
+// hooks;
+import { useAtomValue } from "jotai";
+import { useSetAtom } from "jotai";
+// atmos 
+import { indexedItemIndexAtom } from "@/app/(atoms)/(modal)/modal-atoms";
+import { tasksStateAtom } from "@/app/(atoms)/(tasks)/tasks-atoms";
 
 interface Props {
     BallColor: string;
@@ -17,7 +21,8 @@ export const FlagComponent = ({
     typeOfFlag,
 }:Props) => {
 
-    const { title, setTask } = useContext(todoContext);
+    const indexedItemIndexState = useAtomValue(indexedItemIndexAtom);
+    const setTasksState = useSetAtom(tasksStateAtom);
 
     const addFlagInDatabase = () => {
         const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
@@ -26,7 +31,7 @@ export const FlagComponent = ({
             const database: IDBDatabase = openDatabase.result;
             const transaction: IDBTransaction = database.transaction('tasks',"readwrite");
             const objectstore: IDBObjectStore = transaction.objectStore('tasks');
-            const currentBallColor = objectstore.get(title);
+            const currentBallColor = objectstore.get(indexedItemIndexState);
 
             currentBallColor.onerror = () => {
                 console.log("erro ao obter color");
@@ -37,7 +42,7 @@ export const FlagComponent = ({
                 setNewsValues.type = typeOfFlag;
                 setNewsValues.color = BallColor;
                 objectstore.put(setNewsValues).onsuccess = () => {
-                    UpdateDB(setTask)
+                    UpdateDB(setTasksState);
                 }
             }
         }

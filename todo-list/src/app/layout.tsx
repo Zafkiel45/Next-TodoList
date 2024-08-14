@@ -1,5 +1,6 @@
 import { JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
+import { ProviderJotai } from './providerJotai';
 import './globals.css'
 
 const inter = JetBrains_Mono({ 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }:Readonly<{children: React.ReactN
   return (
     <html lang="pt-br" className='h-fit w-screen flex justify-center items-center '>
       <body className={`${inter.className}   h-fit w-screen flex justify-center items-center `}>
-        {children}
+        <ProviderJotai>
+          {children}
+        </ProviderJotai>
         <Analytics/>
       </body>
     </html>

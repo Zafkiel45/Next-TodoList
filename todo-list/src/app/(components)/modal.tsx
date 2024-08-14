@@ -1,27 +1,39 @@
+'use client';
 import { useContext, useState } from "react";
-import { todoContext } from "./context";
-import { InputRename } from "./(modal_estruture)/inputRename";
-import { TextArea } from "./(modal_estruture)/textArea";
-import { Description } from "./(modal_estruture)/Description";
-import { DeleteButton } from "./(modal_estruture)/delete_button";
-import { HeaderOfModal } from "./(modal_estruture)/header";
-import { UpdateDB } from "./utility/updateDB";
-import { ContainerOfFlags } from "./(modal_estruture)/flagContainer";
-import { TutorialModal } from "./utility/tutorialModal";
+import { todoContext } from "../components/context";
+import { InputRename } from "../components/(modal_estruture)/inputRename";
+import { TextArea } from "../components/(modal_estruture)/textArea";
+import { Description } from "../components/(modal_estruture)/Description";
+import { DeleteButton } from "../components/(modal_estruture)/delete_button";
+import { HeaderOfModal } from "../components/(modal_estruture)/header";
+import { UpdateDB } from "../components/utility/updateDB";
+import { ContainerOfFlags } from "../components/(modal_estruture)/flagContainer";
+import { TutorialModal } from "../components/utility/tutorialModal";
+
+// hooks
+import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
+// atoms
+import { tasksDescriptionStateAtom } from "../(atoms)/(modal)/modal-atoms";
+import { indexedItemIndexAtom } from "../(atoms)/(modal)/modal-atoms";
+import { visibleStateAtom } from "../(atoms)/(modal)/modal-atoms";
+import { renameStateAtom } from "../(atoms)/(modal)/modal-atoms";
+import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
 
 export const Modal = () => {
   const {
-    setSideBar,
-    rename,
-    setRename,
-    setTask,
-    sideBar,
     descrebe,
     setDescrebe,
-    title,
-    task,
-    indexed
   } = useContext(todoContext);
+
+  // atoms values
+  const [tasksDescriptionState, setTasksDescriptionState] = useAtom(tasksDescriptionStateAtom);
+  const [visibleState, setVisibleState] = useAtom(visibleStateAtom);
+  const [renameState, setRenameState] = useAtom(renameStateAtom);
+  const [tasksState, setTasksState] = useAtom(tasksStateAtom);
+  // only read atoms
+  const indexedItemIndexState = useAtomValue(indexedItemIndexAtom)
+
   const content = `
     Ao clicar em alguma das opções, como "academia", você vai marca que esta tarefa
     é voltada para academia, assim, ajudando no reconhecendo no tipo de tarefa. Ao
@@ -35,10 +47,10 @@ export const Modal = () => {
   });
   // the function responsible of sideBar toggle
   const toggleSideBar = (): void => {
-    setSideBar({
-      ...sideBar,
-      position: "right-[-200%]",
-      display: "hidden",
+    setVisibleState({
+      ...visibleState,
+      display: 'hidden',
+      position: 'right-[-200%]'
     });
   };
   // The function responsible of adding a description of a task
@@ -49,7 +61,7 @@ export const Modal = () => {
       const request:IDBDatabase = openDatabase.result;
       const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
       const store:IDBObjectStore = transaction.objectStore("tasks");
-      const element:IDBRequest = store.get(title);
+      const element:IDBRequest = store.get(indexedItemIndexState);
 
       element.onerror = () => {
         console.log("erro ao buscar o elemento!");
@@ -57,10 +69,10 @@ export const Modal = () => {
       element.onsuccess = (event) => {
         console.log("elemento obtido com sucesso!");
         const currentTarget = (event.target as IDBRequest).result;
-        currentTarget.description = descrebe; 
+        currentTarget.description = tasksDescriptionState; 
 
         store.put(currentTarget).onsuccess = () => { 
-          UpdateDB(setTask, undefined, setDescrebe);
+          UpdateDB(setTasksState, undefined, setTasksDescriptionState);
         }
       }
 
@@ -74,19 +86,18 @@ export const Modal = () => {
       const request:IDBDatabase = openDatabase.result;
       const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
       const store:IDBObjectStore = transaction.objectStore("tasks");
-      const element:IDBRequest = store.get(title);
+      const element:IDBRequest = store.get(indexedItemIndexState);
 
       element.onsuccess = (event) => {
         const elementTarget = (event.target as IDBRequest).result;
-        elementTarget.title = rename;
+        elementTarget.title = renameState;
 
         store.put(elementTarget).onsuccess = () => {
-          console.log("rename is finished!")
-          setRename("");
+          setRenameState("");
         }
       }
 
-      UpdateDB(setTask, undefined, undefined);
+      UpdateDB(setTasksState, undefined, undefined);
     }
   };
   // The function responsible for delete a individual task
@@ -97,7 +108,7 @@ export const Modal = () => {
       const request:IDBDatabase = openDatabase.result;
       const transaction:IDBTransaction = request.transaction("tasks", 'readwrite');
       const store:IDBObjectStore = transaction.objectStore("tasks");
-      const element:IDBRequest = store.delete(title);
+      const element:IDBRequest = store.delete(indexedItemIndexState);
 
       element.onsuccess = () => {
         console.log("elemento removido com sucesso!");
@@ -107,7 +118,7 @@ export const Modal = () => {
           blur: false,
         })
         toggleSideBar()
-        UpdateDB(setTask);
+        UpdateDB(setTasksState);
       }
     }
 
@@ -125,7 +136,7 @@ export const Modal = () => {
   };
   return (
     <>
-      <div className={`fixed top-0 flex left-0 w-screen h-screen ${displayControl.blur ? "blur-sm" : " blur-0"} transition-all ${sideBar.display} z-30`}>
+      <div className={`fixed top-0 flex left-0 w-screen h-screen ${displayControl.blur ? "blur-sm" : " blur-0"} transition-all ${visibleState.display} z-30`}>
         <nav
           className={`
           absolute
@@ -135,7 +146,7 @@ export const Modal = () => {
           items-center 
           py-3 
           top-0 
-          ${sideBar.position} 
+          ${visibleState.position} 
           w-full 
           h-full  
           overflow-y-scroll 
@@ -154,11 +165,11 @@ export const Modal = () => {
           <TextArea
             addDescrebe={addDescrebe}
             addDescrebeWithKey={addDescribeWithKey}
-            descrebe={descrebe}
-            setDescrebe={setDescrebe}
+            descrebe={tasksDescriptionState}
+            setDescrebe={setTasksDescriptionState}
           />
           {/* Description */}
-          <Description indexed={indexed} task={task} />
+          <Description task={tasksState} />
           {/* flags */}
           <ContainerOfFlags/>        
           {/* Delet button */}
