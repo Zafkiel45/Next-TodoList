@@ -1,44 +1,60 @@
 'use client'
 import CloseSvg from '../utility/svg_components/x';
 import SearchSvg from '../utility/svg_components/search';
-import { TasksContext } from '../utility/tasksContext';
-import { useContext } from 'react';
+import { use, useContext } from 'react';
 import { todoContext } from '../context';
 import { KeyboardEvent } from 'react';
 import { useState } from 'react';
 
+// hooks
+import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
+import { useSetAtom } from 'jotai';
+// atoms 
+import { 
+    visibleStateAtom,
+    indexedItemIndexAtom, 
+} from '@/app/(atoms)/(modal)/modal-atoms';
+import { 
+    inputSearchTasksModalAtom, 
+    inputSearchValueAtom, 
+    tasksStateAtom, 
+    tasksIndexStateAtom,
+    tasksSearchedAtom,
+} from '@/app/(atoms)/(tasks)/tasks-atoms';
+
 export const SearchTask = () => {
-
-    const { 
-        activeSearch,
-        setActiveSearch,
-    } = useContext(TasksContext);
-
-    const [search, setSearch] = useState('');
-    const [currentElementsSearched, setCurrentElementsSearched] = useState([]);
-    const { task, setSideBar, sideBar, setIndexed, setTitle } = useContext(todoContext);
+    // update and read functiosn:
+    const [inputSearchModalState, setInputSearchModalState] = useAtom(inputSearchTasksModalAtom);
+    const [inputSearchValueState, setInputSearchValueState] = useAtom(inputSearchValueAtom);
+    const [tasksSearchedState, setTasksSearchedState] = useAtom(tasksSearchedAtom);
+    const [visibleState, setVisibleState] = useAtom(visibleStateAtom);
+    // only read value:
+    const tasksState = useAtomValue(tasksStateAtom);
+    // only update:
+    const setTasksIndexState = useSetAtom(tasksIndexStateAtom);
+    const setIndexedItemState = useSetAtom(indexedItemIndexAtom);
 
     const HandlDescription = (taskId:number) => {
-   
         // Encontre a tarefa correta usando o ID
-        const taskToDisplay = task.find(item => item.id === taskId);
+        const taskToDisplay = tasksState.find(item => item.id === taskId);
     
         if (taskToDisplay) {
-            setIndexed(task.indexOf(taskToDisplay));
+            setTasksIndexState(tasksState.indexOf(taskToDisplay));
         } else {
-            setIndexed(null);
+            setTasksIndexState(null);
         }
     }    
         
     const HandleSearchTasks = () => {
-        const elementFilred = task.filter((item) => {
-            return item.title.toLowerCase().trim().includes(search.toLowerCase().trim());
+        const elementFilred = tasksState.filter((item) => {
+            return item.title.toLowerCase().trim().includes(inputSearchValueState.toLowerCase().trim());
         })
         try {
             if(elementFilred.length === 0) {
                 throw new Error("esse elemento não existe!")
             }
-            setCurrentElementsSearched(elementFilred)
+            setTasksSearchedState(elementFilred)
         } catch (mensage) {
             window.alert("a tarefa não existe" + mensage)
         }
@@ -50,22 +66,22 @@ export const SearchTask = () => {
         }
     }
     const HandleOpenModal = (e:number) => {
-        setSideBar({
-            ...sideBar,
+        setVisibleState({
+            ...visibleState,
             position: 'right-0',
             display: 'flex'
         });
-        setTitle(e);
+        setIndexedItemState(e);
     }
 
     const HandleCloseSearchModal = () => {
-        setActiveSearch(false);
-        setSearch('');
-        setCurrentElementsSearched([]);
+        setInputSearchModalState(false);
+        setInputSearchValueState('');
+        setTasksSearchedState([]);
     }
 
     return (
-        <div className={`fixed top-0 left-0 w-screen h-screen ${activeSearch ? 'flex':'hidden'} z-20`}>
+        <div className={`fixed top-0 left-0 w-screen h-screen ${inputSearchModalState ? 'flex':'hidden'} z-20`}>
             <div className={`
                 h-full 
                 w-full
@@ -97,9 +113,9 @@ export const SearchTask = () => {
                     <div className='mobileMini:w-4/5 tablet:w-[70%]'>
                         <input 
                             type="text" 
-                            value={search}
+                            value={inputSearchValueState}
                             onKeyDown={HandleKeyEvent}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => setInputSearchValueState(e.target.value)}
                             aria-label='pesquise por uma tarefa'
                             placeholder='Pesquise por algo'
                             className='
@@ -133,7 +149,7 @@ export const SearchTask = () => {
                 </div>
                 <div className='w-full flex justify-center overflow-y-hidden'>
                     <ol className='flex overflow-y-scroll w-full mobileMini:w-11/12 tablet:w-[79%] desktop:w-[82%]  py-3 px-1 flex-col items-center gap-3'>
-                        {currentElementsSearched.map((item, index) => {
+                        {tasksSearchedState.map((item, index) => {
                             return (
                                 <li  key={item.title} onClick={() => {
                                     HandleOpenModal(item.id);
@@ -167,7 +183,7 @@ export const SearchTask = () => {
                                 dark:text-white
                                 '>
                                     <div className={`
-                                        ${currentElementsSearched[index].color} 
+                                        ${tasksSearchedState[index].color} 
                                         animate-pulse 
                                         -top-1 
                                         -right-1 

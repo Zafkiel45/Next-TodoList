@@ -1,6 +1,10 @@
 'use client'
 import { useContext } from "react"
 import { TasksContext } from "../utility/tasksContext"
+// hooks
+import { useSetAtom } from "jotai"
+// atoms 
+import { inputFilterTasksTagAtom } from "@/app/(atoms)/(tasks)/tasks-atoms"
 
 export const TagsOfFilter = ({
     BackgroundColor, 
@@ -8,10 +12,10 @@ export const TagsOfFilter = ({
     BallColor,
 } ) => {
 
-    const { setCurrentTag } = useContext(TasksContext);
+    const setInputFilterTag = useSetAtom(inputFilterTasksTagAtom);
 
     return (
-        <div onClick={() => setCurrentTag(typeOfFlag)} className={`
+        <div onClick={() => setInputFilterTag(typeOfFlag)} className={`
             ${BackgroundColor} 
             w-fit
             h-fit 

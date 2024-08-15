@@ -30,7 +30,6 @@ export const InputTask = () => {
   const {
     setBlur,
     blur,
-    setTask,
     name,
     setName,
     descrebe,

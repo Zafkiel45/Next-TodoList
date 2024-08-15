@@ -1,6 +1,5 @@
 'use client';
-import { useContext, useState } from "react";
-import { todoContext } from "../components/context";
+import { useState } from "react";
 import { InputRename } from "../components/(modal_estruture)/inputRename";
 import { TextArea } from "../components/(modal_estruture)/textArea";
 import { Description } from "../components/(modal_estruture)/Description";
@@ -21,10 +20,6 @@ import { renameStateAtom } from "../(atoms)/(modal)/modal-atoms";
 import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
 
 export const Modal = () => {
-  const {
-    descrebe,
-    setDescrebe,
-  } = useContext(todoContext);
 
   // atoms values
   const [tasksDescriptionState, setTasksDescriptionState] = useAtom(tasksDescriptionStateAtom);

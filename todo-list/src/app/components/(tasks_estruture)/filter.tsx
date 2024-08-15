@@ -1,17 +1,30 @@
 "use client";
 import AskIcon from "../utility/svg_components/unknown";
-import { TasksContext } from "../utility/tasksContext";
 import CloseButton from "../utility/svg_components/x";
 import { TagsOfFilter } from "./tags";
-import { useContext } from "react";
-import { todoContext } from "../context";
 import { UpdateDB } from "../utility/updateDB";
 import { TutorialModal } from "../utility/tutorialModal";
+// hooks
+import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
+// atoms 
+import { 
+  tasksStateAtom, 
+  inputFilterTasksModalAtom, 
+  inputFilterTasksTagAtom, 
+} from "@/app/(atoms)/(tasks)/tasks-atoms";
+import { modalTutorialStateAtom } from "@/app/(atoms)/(modal)/modal-utility-atoms";
 
 export const FilterTasks = () => {
-  const { activeFilter, setActiveFilter, currentTag, setVisibility } =
-    useContext(TasksContext);
-  const { setTask } = useContext(todoContext);
+  // update and read functions:
+  const [inputFilterModalState, setInputFilterModalState] = useAtom(inputFilterTasksModalAtom);
+  // only update:
+  const setTasksState = useSetAtom(tasksStateAtom);
+  const setModalTutorialState = useSetAtom(modalTutorialStateAtom);
+  // only read 
+  const inputFilterTag = useAtomValue(inputFilterTasksTagAtom);
+
   const content = `
   Ao clicar em uma opção, como por exemplo, casa só irá aparecer as tarefas
   que você marcou como case. Isso não quer dizer que as outras tarefas foram
@@ -22,7 +35,7 @@ export const FilterTasks = () => {
   `;
   
   const HandleFilter = () => {
-    if (currentTag === "") {
+    if (inputFilterTag === "") {
       window.alert("erro");
       return;
     }
@@ -38,29 +51,29 @@ export const FilterTasks = () => {
         const cursor: IDBCursorWithValue = (event.target as IDBRequest).result;
 
         if (cursor) {
-          if (currentTag !== "tudo") {
-            const currentElement = cursor.value.type === currentTag;
+          if (inputFilterTag !== "tudo") {
+            const currentElement = cursor.value.type === inputFilterTag;
             if (currentElement) {
               currentObject.push(cursor.value);
             }
           } else {
-            UpdateDB(setTask);
-            setActiveFilter(false);
+            UpdateDB(setTasksState);
+            setInputFilterModalState(false);
             return;
           }
           cursor.continue();
         } else {
-          setTask(currentObject);
+          setTasksState(currentObject);
         }
       };
     };
-    setActiveFilter(false);
+    setInputFilterModalState(false);
   };
 
   return (
     <div
       className={`${
-        activeFilter ? "flex" : "hidden"
+        inputFilterModalState ? "flex" : "hidden"
       } pb-3 top-0 left-0 w-screen h-screen fixed bg-[#F8F8F8] dark:bg-[#121013] z-10`}
     >
       <div
@@ -68,7 +81,7 @@ export const FilterTasks = () => {
       >
         <header className="w-full py-2 h-auto">
           <nav className="flex justify-between px-3 items-center">
-            <div onClick={() => setVisibility(() => true)}>
+            <div onClick={() => setModalTutorialState(() => true)}>
               <AskIcon />
             </div>
             <div className="text-lg mobileMini:text-xl font-medium">
@@ -76,7 +89,7 @@ export const FilterTasks = () => {
             </div>
             <div
               className="cursor-pointer"
-              onClick={() => setActiveFilter(false)}
+              onClick={() => setInputFilterModalState(false)}
             >
               <CloseButton height="h-[22px] w-[22px]" />
             </div>

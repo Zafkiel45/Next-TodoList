@@ -1,12 +1,19 @@
 'use client'
 import SearchSvg from "../utility/svg_components/search";
 import FilterSvg from "../utility/svg_components/filter";
-import { useContext } from "react";
-import { TasksContext } from "../utility/tasksContext";
+// hooks
+import { useSetAtom } from "jotai";
+// atoms 
+import { 
+  inputSearchTasksModalAtom,
+  inputFilterTasksModalAtom 
+} from "@/app/(atoms)/(tasks)/tasks-atoms";
+
 
 export const ButtonsOfTasks = () => {
 
-  const { setActiveSearch, setActiveFilter } = useContext(TasksContext)
+  const setInputSearchModalState = useSetAtom(inputSearchTasksModalAtom);
+  const setInputFilterModalState = useSetAtom(inputFilterTasksModalAtom);
 
   return (
     <>
@@ -22,7 +29,7 @@ export const ButtonsOfTasks = () => {
         desktopBig:w-[70%]
       ">
         <div
-          onClick={() => setActiveSearch(true)}
+          onClick={() => setInputSearchModalState(true)}
           className="
             dark:text-[#BA8AEB] 
             border
@@ -47,7 +54,7 @@ export const ButtonsOfTasks = () => {
           </div>
         </div>
         <div
-          onClick={() => setActiveFilter(true)}
+          onClick={() => setInputFilterModalState(true)}
           className="
           dark:text-[#BA8AEB] 
             border

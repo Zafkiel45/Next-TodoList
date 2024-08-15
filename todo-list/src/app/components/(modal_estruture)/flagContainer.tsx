@@ -1,12 +1,14 @@
 'use client'
 import UnknownSvg from '../utility/svg_components/unknown';
 import { FlagComponent } from './flag';
-import { useContext } from 'react';
-import { TasksContext } from '../utility/tasksContext';
+// hooks
+import { useSetAtom } from 'jotai';
+// atoms
+import { modalTutorialStateAtom } from '@/app/(atoms)/(modal)/modal-utility-atoms';
 
 export const ContainerOfFlags = () => {
 
-    const { setVisibility } = useContext(TasksContext);
+    const setModalTutorialState = useSetAtom(modalTutorialStateAtom);
 
     return (
         <div className="
@@ -35,7 +37,7 @@ export const ContainerOfFlags = () => {
                 <div>
                     Tipos de tarefas:
                 </div>
-                <div onClick={() => setVisibility(() => true)}>
+                <div onClick={() => setModalTutorialState(() => true)}>
                     <UnknownSvg/>
                 </div>
             </div>

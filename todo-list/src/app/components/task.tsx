@@ -1,10 +1,8 @@
 'use client';
-import { useContext, useMemo } from "react"
-import { todoContext } from "./context"
 import { SearchTask } from "./(tasks_estruture)/search";
 import { FilterTasks } from "./(tasks_estruture)/filter";
-
 // hooks
+import { useMemo } from "react";
 import { useAtom } from "jotai";
 import { useSetAtom } from "jotai";
 import { useAtomValue } from "jotai";
@@ -15,18 +13,18 @@ import { tasksIndexStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
 import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
 
 export const Tasks = () => {
-    // only update functions
+    
     const setIndexedItemState = useSetAtom(indexedItemIndexAtom);
     const setTasksIndexState = useSetAtom(tasksIndexStateAtom);
-    // read and update
+    
     const [visibleState, setVisibleState] = useAtom(visibleStateAtom); 
-    // only read 
-    const task = useAtomValue(tasksStateAtom);
+    
+    const tasks = useAtomValue(tasksStateAtom);
 
     const tasksOptimized = useMemo(() => {
         try {
 
-            return task.map((item, index) => {
+            return tasks.map((item, index) => {
                 return (
                     <li  
                         onClick={() => {
@@ -62,7 +60,7 @@ export const Tasks = () => {
                             "
                         key={Math.random()}> 
                         <div>{item.title}</div>
-                        <div className={`${task[index].color} animate-pulse -top-1 -right-1 rounded-full w-3 h-3 absolute`}>
+                        <div className={`${tasks[index].color} animate-pulse -top-1 -right-1 rounded-full w-3 h-3 absolute`}>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="dark:fill-[#B371D1] fill-[#3F3F3F] bi bi-three-dots" viewBox="0 0 16 16">
@@ -76,7 +74,7 @@ export const Tasks = () => {
         } catch({name, mensage}) {
             console.log("ocorreu um erro " + name + " " + mensage)
         }
-    }, [task]);
+    }, [tasks]);
     
 
     const InterativeElements = (e:number, m: number):void => {
