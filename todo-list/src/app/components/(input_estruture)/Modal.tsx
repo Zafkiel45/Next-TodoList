@@ -1,28 +1,29 @@
-// removeAllElements, objectComplete, dispacth, setBlur
-
-import { Dispatch, SetStateAction } from "react";
-import { controler } from "../input";
+'use client'
 import CloseButton from '../utility/svg_components/x'
+// hooks
+import { useAtom, useSetAtom } from 'jotai';
+// atoms 
+import { warnModalStateAtom } from '@/app/(atoms)/(input)/input-atoms';
+import { inputBlurModalAtom } from '@/app/(atoms)/(input)/input-atoms';
 
 interface TypeOfProps {
-  Blur: Dispatch<SetStateAction<boolean>>;
-  dispatch: Dispatch<SetStateAction<controler>>;
-  objectComplete: controler;
   removeAllElements: () => void;
 }
 
 export const Modal = ({
-  Blur,
-  dispatch,
-  objectComplete,
   removeAllElements,
 }: TypeOfProps) => {
+
+  const [warnModalState, setWarnModalState]= useAtom(warnModalStateAtom);
+  // only update
+  const setInputBlurModalState = useSetAtom(inputBlurModalAtom);
+
   return (
     <div
       className={`
         fixed
         top-0 
-        ${objectComplete.visible} 
+        ${warnModalState.display} 
       text-black 
         dark:text-white 
         gap-4 items-center 
@@ -64,8 +65,8 @@ export const Modal = ({
           AVISO!
         </h1>
         <div onClick={() => {
-            dispatch({ ...objectComplete, visible: "hidden" });
-            Blur(() => false);
+            setWarnModalState({ ...warnModalState, display: "hidden" });
+            setInputBlurModalState(false);
         }}>
           <CloseButton height="h-[22px] w-[22px]" />
         </div>

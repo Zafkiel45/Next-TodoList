@@ -1,21 +1,24 @@
 'use client'
-import { todoContext } from "../context"
-import { useContext } from "react"
+// hooks
+import { useAtom } from "jotai"
+// atoms 
+import { inputTaskNameAtom } from "@/app/(atoms)/(input)/input-atoms"
 
 interface TypeOfProps {
     keyEvent: (e:any) => void;
 }
 
 export const InputNameTask = ({keyEvent}:TypeOfProps) => {
-    const { setName, name } = useContext(todoContext);
+   
+    const [inputTaskNameState, setInputTaskNameState] = useAtom(inputTaskNameAtom);
 
     return (
         <div className="flex justify-center w-full items-center">
             <input
                 type="text"
-                value={name}
+                value={inputTaskNameState}
                 onKeyDown={keyEvent}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setInputTaskNameState(e.target.value)}
                 placeholder="Digite um nome..."
                 aria-label="inserir o nome da tarefa"
                 className={`

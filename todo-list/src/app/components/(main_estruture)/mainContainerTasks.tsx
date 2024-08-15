@@ -1,4 +1,4 @@
-import { Tasks } from "../task"
+import { Tasks } from "@/app/(components)/task"
 import { ButtonsOfTasks } from "../(tasks_estruture)/buttons"
 
 export const MainContainerTasks = ({blur}:{blur:boolean}) => {

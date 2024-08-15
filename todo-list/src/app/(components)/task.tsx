@@ -1,6 +1,6 @@
 'use client';
-import { SearchTask } from "./(tasks_estruture)/search";
-import { FilterTasks } from "./(tasks_estruture)/filter";
+import { SearchTask } from "../components/(tasks_estruture)/search";
+import { FilterTasks } from "../components/(tasks_estruture)/filter";
 // hooks
 import { useMemo } from "react";
 import { useAtom } from "jotai";

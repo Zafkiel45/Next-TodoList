@@ -8,6 +8,10 @@ import { AllElements } from "./components/utility/fatherMode";
 import { CloseTasksButton } from "./components/(main_estruture)/closeTasksButton";
 import { MainContainerInputs } from "./components/(main_estruture)/mainContainerInputs";
 import { MainContainerTasks } from "./components/(main_estruture)/mainContainerTasks";
+// hooks
+import { useAtom } from "jotai";
+// atoms
+import { globalToggleSidebarAtoms } from "./(atoms)/(global)/global-atoms";
 
 export const TodoListMainComponent = () => {
 
@@ -20,20 +24,23 @@ export const TodoListMainComponent = () => {
     const [currentTag, setCurrentTag] = useState('');
     const [descrebe, setDescrebe] = useState('');
     const [indexed, setIndexed] = useState(null);
-    const [toggleSideBar, setToggleSideBar] = useState<string>('left-0');
     const [activeSearch, setActiveSearch] = useState<boolean>(false);
     const [activeFilter, setActiveFilter] = useState<boolean>(false);
     const [visibility, setVisibility] = useState<boolean>(false);
     const [ElementDescription, setElementDescription] = useState('')
+
+    const [globalToggleSidebarState, setGlobalToggleSidebarState] = useAtom(globalToggleSidebarAtoms);
+
     const [sideBar, setSideBar] = useState({
       position:'right-[-200%]',
       display: 'hidden',
     });
+    
     const toggleSideBarFunction = ():void => {
-      setToggleSideBar('left-[-100%]')
+      setGlobalToggleSidebarState('left-[-100%]')
     }
     const toggleSideBarFunctionReverse = ():void => {
-      setToggleSideBar('left-0')
+      setGlobalToggleSidebarState('left-0')
     }
 
     return (
@@ -62,7 +69,7 @@ export const TodoListMainComponent = () => {
           }}>
             <div className={`flex h-full`}>
               <CloseTasksButton toggleSideBarFunctionReverse={toggleSideBarFunctionReverse} />
-              <MainContainerInputs toggleSideBar={toggleSideBar} />
+              <MainContainerInputs toggleSideBar={globalToggleSidebarState} />
               <TasksContext.Provider value={{
                 activeFilter,
                 activeSearch, 

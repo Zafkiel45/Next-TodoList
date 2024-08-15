@@ -6,7 +6,6 @@ export const CloseButton = (
   
     }:{
       toggleSideBarFunction: () => void,
-
     }) => {
 
       return (

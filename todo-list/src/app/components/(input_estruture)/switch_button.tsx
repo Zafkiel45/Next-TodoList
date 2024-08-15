@@ -3,21 +3,25 @@ import {useEffect, useState} from "react";
 import MoonSvg from '../utility/svg_components/moon';
 import SunSvg from '../utility/svg_components/sun';
 
+import { useAtom } from "jotai";
+// atoms
+import { switchModeButtonAtom } from "@/app/(atoms)/(input)/input-atoms";
+
 export const SwitchModeButton = () => {
 
-  const [currentState, setCurrentState] = useState('')
+  const [switchModeButtonState, setSwitchModeButtonState] = useAtom(switchModeButtonAtom);
 
   useEffect(() => {
       try {
           if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
               document.documentElement.classList.remove('light');
               localStorage.ThemeStorage = 'dark'
-              setCurrentState('dark')
+              setSwitchModeButtonState('dark')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           } else {
               document.documentElement.classList.remove('dark');
               localStorage.ThemeStorage= 'light'
-              setCurrentState('light')
+              setSwitchModeButtonState('light')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           }
 
@@ -33,11 +37,11 @@ export const SwitchModeButton = () => {
 
           if(newCurrentMode === 'dark') {
               document.documentElement.classList.remove('light');
-              setCurrentState('dark')
+              setSwitchModeButtonState('dark')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           } else {
               document.documentElement.classList.remove('dark');
-              setCurrentState('light')
+              setSwitchModeButtonState('light')
               document.documentElement.classList.add(localStorage.ThemeStorage);
           }
 
@@ -67,7 +71,7 @@ export const SwitchModeButton = () => {
           shadow-sm 
           w-4/5`}>
           {
-            currentState === 'dark' ? 
+            switchModeButtonState === 'dark' ? 
               <MoonSvg/> 
               : 
               <SunSvg/>

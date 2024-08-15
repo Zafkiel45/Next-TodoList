@@ -1,4 +1,4 @@
-import { InputTask } from "../input"
+import { InputTask } from "../../(components)/input"
 export const MainContainerInputs = ({toggleSideBar}:{toggleSideBar:string}) => {
     return (
         <div className={`

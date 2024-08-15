@@ -1,42 +1,36 @@
 'use client';
-import { useContext, useState, KeyboardEvent } from "react";
-import { todoContext } from "./context";
-import { SwitchModeButton } from "./(input_estruture)/switch_button";
-import { HowToUse } from "./(input_estruture)/howToUse";
-import { InputNameTask } from "./(input_estruture)/inputNameTask";
-import { AddButton } from "./(input_estruture)/addButton";
-import { DeleteButton } from "./(input_estruture)/deleteButton";
-import { Modal } from "./(input_estruture)/Modal";
-import { useIndexedDB } from "./(database)/useOpenDB";
-import { UpdateDB } from "./utility/updateDB";
-import { HeaderInput } from "./(input_estruture)/header";
-
-import { useSetAtom } from "jotai";
+import { useContext, KeyboardEvent } from "react";
+import { todoContext } from "../components/context";
+import { SwitchModeButton } from "../components/(input_estruture)/switch_button";
+import { HowToUse } from "../components/(input_estruture)/howToUse";
+import { InputNameTask } from "../components/(input_estruture)/inputNameTask";
+import { AddButton } from "../components/(input_estruture)/addButton";
+import { DeleteButton } from "../components/(input_estruture)/deleteButton";
+import { Modal } from "../components/(input_estruture)/Modal";
+import { useIndexedDB } from "../components/(database)/useOpenDB";
+import { UpdateDB } from "../components/utility/updateDB";
+import { HeaderInput } from "../components/(input_estruture)/header";
+// hooks
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
+// atoms
 import { tasksStateAtom } from "../(atoms)/(tasks)/tasks-atoms";
-
-export interface controler {
-  visible: string;
-  blur?: boolean;
-}
+import { inputTaskNameAtom } from "../(atoms)/(input)/input-atoms";
+import { tasksDescriptionStateAtom } from "../(atoms)/(modal)/modal-atoms";
+import { warnModalStateAtom } from "../(atoms)/(input)/input-atoms";
+import { inputBlurModalAtom } from "../(atoms)/(input)/input-atoms";
 
 export const InputTask = () => {
-
   // only update:
   const setTasksState = useSetAtom(tasksStateAtom);
+  // update and read 
+  const [inputTaskNameState, setInputTaskNameState] = useAtom(inputTaskNameAtom);
+  const [warnModalState, setWarnModalState] = useAtom(warnModalStateAtom);
+  const [inputBlurModalState, setInputBlurModalState] = useAtom(inputBlurModalAtom);
+  // only read:
+  const tasksDescriptionState = useAtomValue(tasksDescriptionStateAtom);
 
-  const [displayControl, setDisplayControl] = useState<controler>({
-    visible: "hidden",
-  });
-  const {
-    setBlur,
-    blur,
-    name,
-    setName,
-    descrebe,
-    toggleSideBarFunction,
-  } = useContext(todoContext);
+  const { toggleSideBarFunction } = useContext(todoContext);
 
-  // ===========================================================================
   useIndexedDB("tasks", "database");
   const addElementInDB = async () => {
     const currentDataBase: IDBOpenDBRequest = indexedDB.open("database");
@@ -51,21 +45,21 @@ export const InputTask = () => {
         window.alert("mesmo nome!");
       };
 
-      if (name === "" || name.trim() === "" || name.length >= 20) {
+      if (inputTaskNameState === "" || inputTaskNameState.trim() === "" || inputTaskNameState.length >= 20) {
         window.alert("Erro!");
-        setName("");
+        setInputTaskNameState("");
         database.abort();
         return;
       }
 
       objectStorage.add({
-        title: name,
-        description: descrebe,
+        title: inputTaskNameState,
+        description: tasksDescriptionState,
         type: '',
         color: '',
       });
 
-      UpdateDB(setTasksState, setName);
+      UpdateDB(setTasksState, setInputTaskNameState);
       toggleSideBarFunction();
     };
 
@@ -73,7 +67,7 @@ export const InputTask = () => {
       console.log("ops, algo deu errado!");
     };
   };
-  // ===========================================================================
+
   const keyPressEvent = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       addElementInDB();
@@ -81,7 +75,7 @@ export const InputTask = () => {
       event.currentTarget.blur();
     }
   };
-  // ===========================================================================
+
   const removeAllElements = (): void => {
     const openDatabase: IDBOpenDBRequest = indexedDB.open("database");
 
@@ -103,16 +97,16 @@ export const InputTask = () => {
       };
 
       setTasksState(() => []);
-      setBlur(() => false);
-      setDisplayControl({ ...displayControl, visible: "hidden", blur: false });
+      setInputBlurModalState(() => false);
+      setWarnModalState({ ...warnModalState, display: "hidden", blur: false });
     };
   };
-  // ===========================================================================
+  
   const controlElementsDisplay = () => {
-    setDisplayControl({ ...displayControl, visible: "flex" });
-    setBlur(() => true);
+    setWarnModalState({ ...warnModalState, display: "flex" });
+    setInputBlurModalState(() => true);
   };
-  // ===========================================================================
+
   return (
     <>
       <div
@@ -121,7 +115,7 @@ export const InputTask = () => {
         pt-3 
         w-full 
         transition-all 
-        ${blur ? "blur-sm" : null} 
+        ${inputBlurModalState ? "blur-sm" : null} 
         h-full
         overflow-auto
         mobileMini:pb-8
@@ -147,9 +141,6 @@ export const InputTask = () => {
         <HowToUse />
       </div>
       <Modal
-        Blur={setBlur}
-        dispatch={setDisplayControl}
-        objectComplete={displayControl}
         removeAllElements={removeAllElements}
       />
     </>

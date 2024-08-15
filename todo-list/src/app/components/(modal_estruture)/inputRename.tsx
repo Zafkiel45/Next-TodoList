@@ -1,6 +1,4 @@
 "use client";
-import { todoContext } from "../context";
-import { useContext } from "react";
 import RenameSVG from "../utility/svg_components/rename";
 // hooks
 import { useAtom } from "jotai";
@@ -12,7 +10,6 @@ interface TypeOfProps {
 }
 
 export const InputRename = ({ renameKey, addRename }: TypeOfProps) => {
-  const { rename, setRename } = useContext(todoContext);
 
   const [renameState, setRenameState] = useAtom(renameStateAtom);
 
